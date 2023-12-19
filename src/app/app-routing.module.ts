@@ -2,17 +2,23 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './core/pages/login/login.component';
 import { EditProfileComponent } from './core/pages/edit-profile/edit-profile.component';
+import { authGuard } from './guards/auth.guard';
 
 const routes: Routes = [
-    {
-        path: '', redirectTo: '/login', pathMatch: 'full'
-    },
-    {
-      path: 'login', component: LoginComponent
-    },
-    {
-      path: 'edit-profile', component: EditProfileComponent
-    }
+  {
+    path: '',
+    redirectTo: '/login',
+    pathMatch: 'full',
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'edit-profile',
+    component: EditProfileComponent,
+    canActivate: [authGuard],
+  },
 ];
 
 @NgModule({
