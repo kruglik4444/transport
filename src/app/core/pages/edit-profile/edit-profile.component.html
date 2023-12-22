@@ -1,1 +1,104 @@
-<p>edit-profile works!</p>
+<form [formGroup]="form">
+  <div class="tw-flex tw-flex-col tw-gap-y-5">
+    <mat-card>
+        <mat-card-header>
+          <mat-card-title> Выберите тип профиля </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="tw-flex tw-gap-x-5">
+            <mat-form-field class="tw-basis-full">
+              <mat-label>Тип Профиля</mat-label>
+              <mat-select formControlName="userType">
+                <mat-option
+                  [value]="userType"
+                  *ngFor="let userType of userTypesArray; trackByIndex"
+                >
+                  {{ userType }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    
+      <mat-card *ngIf="form.controls['userType'].value === userTypes.CARRIER">
+        <mat-card-header>
+          <mat-card-title> Введите информацию о грузоперевозчике </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="tw-flex tw-gap-x-5">
+                <mat-form-field class="tw-basis-1/3">
+                    <mat-label>Название организации</mat-label>
+                    <input
+                      formControlName="companyName"
+                      type="text"
+                      matInput
+                      placeholder="Введи название организации"
+                    />
+                    <mat-error
+                      *ngIf="form.controls['companyName'].hasError('required')"
+                    >
+                      Введи название организации
+                    </mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="tw-basis-1/3">
+                    <mat-label>ИНН организации</mat-label>
+                    <input
+                      formControlName="companyINN"
+                      type="text"
+                      matInput
+                      placeholder="Введи ИНН организации"
+                    />
+                    <mat-error
+                      *ngIf="form.controls['companyINN'].hasError('required')"
+                    >
+                      Введи ИНН организации
+                    </mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="tw-basis-1/3">
+                    <mat-label>ОГРН организации</mat-label>
+                    <input
+                      formControlName="companyOGRN"
+                      type="text"
+                      matInput
+                      placeholder="Введи ОГРН организации"
+                    />
+                    <mat-error
+                      *ngIf="form.controls['companyOGRN'].hasError('required')"
+                    >
+                      Введи ОГРН организации
+                    </mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="tw-basis-1/3">
+                    <mat-label>КПП организации</mat-label>
+                    <input
+                      formControlName="companyKPP"
+                      type="text"
+                      matInput
+                      placeholder="Введи КПП организации"
+                    />
+                    <mat-error
+                      *ngIf="form.controls['companyKPP'].hasError('required')"
+                    >
+                      Введи КПП организации
+                    </mat-error>
+                  </mat-form-field>
+            </div>
+        </mat-card-content>
+      </mat-card>
+    
+      <mat-card *ngIf="form.controls['userType'].value === userTypes.PRODUCER">
+        <mat-card-header>
+          <mat-card-title> Введите информацию о грузоотправителе </mat-card-title>
+        </mat-card-header>
+        <mat-card-content> </mat-card-content>
+      </mat-card>
+    
+      <mat-card *ngIf="form.controls['userType'].value === userTypes.DRIVER">
+        <mat-card-header>
+          <mat-card-title> Введите информацию о водителе </mat-card-title>
+        </mat-card-header>
+        <mat-card-content> </mat-card-content>
+      </mat-card>
+  </div>
+</form>

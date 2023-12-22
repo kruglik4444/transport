@@ -11,10 +11,16 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NotificationComponent } from './components/notification/notification.component';
-import {MatInputModule} from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
-  declarations: [HeaderComponent, LoginComponent, EditProfileComponent, NotificationComponent],
+  declarations: [
+    HeaderComponent,
+    LoginComponent,
+    EditProfileComponent,
+    NotificationComponent,
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -25,6 +31,7 @@ import {MatInputModule} from '@angular/material/input';
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSelectModule,
   ],
   exports: [HeaderComponent, LoginComponent, EditProfileComponent],
 })
