@@ -1,104 +1,197 @@
 <form [formGroup]="form">
   <div class="tw-flex tw-flex-col tw-gap-y-5">
     <mat-card>
-        <mat-card-header>
-          <mat-card-title> Выберите тип профиля </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <div class="tw-flex tw-gap-x-5">
-            <mat-form-field class="tw-basis-full">
-              <mat-label>Тип Профиля</mat-label>
-              <mat-select formControlName="userType">
-                <mat-option
-                  [value]="userType"
-                  *ngFor="let userType of userTypesArray; trackByIndex"
-                >
-                  {{ userType }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-        </mat-card-content>
-      </mat-card>
-    
-      <mat-card *ngIf="form.controls['userType'].value === userTypes.CARRIER">
-        <mat-card-header>
-          <mat-card-title> Введите информацию о грузоперевозчике </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <div class="tw-flex tw-gap-x-5">
-                <mat-form-field class="tw-basis-1/3">
-                    <mat-label>Название организации</mat-label>
-                    <input
-                      formControlName="companyName"
-                      type="text"
-                      matInput
-                      placeholder="Введи название организации"
-                    />
-                    <mat-error
-                      *ngIf="form.controls['companyName'].hasError('required')"
-                    >
-                      Введи название организации
-                    </mat-error>
-                  </mat-form-field>
-                  <mat-form-field class="tw-basis-1/3">
-                    <mat-label>ИНН организации</mat-label>
-                    <input
-                      formControlName="companyINN"
-                      type="text"
-                      matInput
-                      placeholder="Введи ИНН организации"
-                    />
-                    <mat-error
-                      *ngIf="form.controls['companyINN'].hasError('required')"
-                    >
-                      Введи ИНН организации
-                    </mat-error>
-                  </mat-form-field>
-                  <mat-form-field class="tw-basis-1/3">
-                    <mat-label>ОГРН организации</mat-label>
-                    <input
-                      formControlName="companyOGRN"
-                      type="text"
-                      matInput
-                      placeholder="Введи ОГРН организации"
-                    />
-                    <mat-error
-                      *ngIf="form.controls['companyOGRN'].hasError('required')"
-                    >
-                      Введи ОГРН организации
-                    </mat-error>
-                  </mat-form-field>
-                  <mat-form-field class="tw-basis-1/3">
-                    <mat-label>КПП организации</mat-label>
-                    <input
-                      formControlName="companyKPP"
-                      type="text"
-                      matInput
-                      placeholder="Введи КПП организации"
-                    />
-                    <mat-error
-                      *ngIf="form.controls['companyKPP'].hasError('required')"
-                    >
-                      Введи КПП организации
-                    </mat-error>
-                  </mat-form-field>
-            </div>
-        </mat-card-content>
-      </mat-card>
-    
-      <mat-card *ngIf="form.controls['userType'].value === userTypes.PRODUCER">
-        <mat-card-header>
-          <mat-card-title> Введите информацию о грузоотправителе </mat-card-title>
-        </mat-card-header>
-        <mat-card-content> </mat-card-content>
-      </mat-card>
-    
-      <mat-card *ngIf="form.controls['userType'].value === userTypes.DRIVER">
-        <mat-card-header>
-          <mat-card-title> Введите информацию о водителе </mat-card-title>
-        </mat-card-header>
-        <mat-card-content> </mat-card-content>
-      </mat-card>
+      <mat-card-header>
+        <mat-card-title> Выберите тип профиля </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="tw-flex tw-gap-x-5">
+          <mat-form-field class="tw-basis-full">
+            <mat-label>Тип Профиля</mat-label>
+            <mat-select formControlName="userType">
+              <mat-option
+                [value]="userType"
+                *ngFor="let userType of userTypesArray; trackByIndex"
+              >
+                {{ userType }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.controls['userType'].hasError('required')">
+              Выбери тип профиля
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card *ngIf="form.controls['userType'].value">
+      <mat-card-header>
+        <mat-card-title>
+          Введите информацию о
+          {{
+            form.controls["userType"].value === userTypes.CARRIER
+              ? "грузоперевозчике"
+              : "грузоотправителе"
+          }}
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="tw-flex tw-gap-x-5">
+          <mat-form-field class="tw-basis-1/4">
+            <mat-label>Название организации</mat-label>
+            <input
+              formControlName="companyName"
+              type="text"
+              matInput
+              placeholder="Введи название организации"
+            />
+            <mat-error
+              *ngIf="form.controls['companyName'].hasError('required')"
+            >
+              Введи название организации
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="tw-basis-1/4">
+            <mat-label>ИНН организации</mat-label>
+            <input
+              formControlName="companyINN"
+              type="text"
+              maxlength="12"
+              matInput
+              placeholder="Введи ИНН организации"
+            />
+            <mat-error *ngIf="form.controls['companyINN'].hasError('required')">
+              Введи ИНН организации
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="tw-basis-1/4">
+            <mat-label>ОГРН организации</mat-label>
+            <input
+              formControlName="companyOGRN"
+              type="text"
+              maxlength="13"
+              matInput
+              placeholder="Введи ОГРН организации"
+            />
+            <mat-error
+              *ngIf="form.controls['companyOGRN'].hasError('required')"
+            >
+              Введи ОГРН организации
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="tw-basis-1/4">
+            <mat-label>КПП организации</mat-label>
+            <input
+              formControlName="companyKPP"
+              type="text"
+              maxlength="9"
+              matInput
+              placeholder="Введи КПП организации"
+            />
+            <mat-error *ngIf="form.controls['companyKPP'].hasError('required')">
+              Введи КПП организации
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="tw-flex tw-gap-x-5">
+          <mat-form-field class="tw-basis-1/2">
+            <mat-label>Адрес</mat-label>
+            <input
+              formControlName="companyAddress"
+              type="text"
+              matInput
+              placeholder="Введи адрес"
+            />
+            <mat-error
+              *ngIf="form.controls['companyAddress'].hasError('required')"
+            >
+              Введи адрес
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="tw-basis-1/4">
+            <mat-label>Телефон организации</mat-label>
+            <input
+              formControlName="companyPhone"
+              type="text"
+              matInput
+              placeholder="Введи телефон организации"
+            />
+            <mat-error
+              *ngIf="form.controls['companyPhone'].hasError('required')"
+            >
+              Введи телефон организации
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="tw-basis-1/4">
+            <mat-label>Система налогооблажения</mat-label>
+            <mat-select formControlName="companyTaxType">
+              <mat-option
+                [value]="userTaxType"
+                *ngFor="let userTaxType of userTaxTypesArray; trackByIndex"
+              >
+                {{ userTaxType }}
+              </mat-option>
+            </mat-select>
+            <mat-error
+              *ngIf="form.controls['companyTaxType'].hasError('required')"
+            >
+              Выбери систему налогооблажения
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="tw-flex tw-gap-5 tw-mt-3">
+          <button
+            color="primary"
+            mat-stroked-button
+            (click)="photoInput.click()"
+          >
+            <span>Загрузить фотографию</span>
+            <input
+              formControlname="userPhoto"
+              #photoInput
+              type="file"
+              (change)="onFileSelected($event, 'photo')"
+              style="display: none"
+            />
+          </button>
+          <mat-icon
+            *ngIf="form.controls['userPhoto'].valid"
+            class="tw-text-green-600 tw-mt-1"
+            >check_circle</mat-icon
+          >
+          <button
+            color="primary"
+            mat-stroked-button
+            (click)="passportInput.click()"
+          >
+            <span>Загрузить скан ЕГРЮЛ</span>
+            <input
+              formControlname="userDocument"
+              class="tw-hidden"
+              #passportInput
+              type="file"
+              (change)="onFileSelected($event, 'document')"
+            />
+          </button>
+          <mat-icon
+            *ngIf="form.controls['userDocument'].valid"
+            class="tw-text-green-600 tw-mt-1"
+            >check_circle</mat-icon
+          >
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="tw-mt-5">
+    <button
+      *ngIf="form.controls['userType'].value"
+      (click)="next()"
+      [disabled]="!this.form.valid"
+      color="primary"
+      mat-raised-button
+    >
+      Продолжить
+    </button>
   </div>
 </form>

@@ -1,5 +1,10 @@
 export enum UserTypes {
-    DRIVER = 'Водитель',
     CARRIER = 'Грузоперевозчик',
     PRODUCER = 'Грузоотправитель',
+}
+
+export enum UserTaxTypes {
+    COMMON = 'Общая',
+    SIMPLIFIED = 'Упрощенная',
+    PATENT = 'Патент'
 }

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { UserTypes } from '../../enums/user-types.enum';
+import { UserTaxTypes, UserTypes } from '../../enums/user-types.enum';
 import {
   UntypedFormBuilder,
   UntypedFormGroup,
@@ -8,6 +8,7 @@ import {
 import { Subject, takeUntil } from 'rxjs';
 import { Storage, ref, uploadBytes } from '@angular/fire/storage';
 import { LoginService } from '../login/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-profile',
@@ -15,7 +16,15 @@ import { LoginService } from '../login/login.service';
   styleUrls: ['./edit-profile.component.scss'],
 })
 export class EditProfileComponent implements OnInit, OnDestroy {
-  userTypesArray = [UserTypes.CARRIER, UserTypes.DRIVER, UserTypes.PRODUCER];
+  userTypesArray = [UserTypes.CARRIER, UserTypes.PRODUCER];
+
+  userTaxTypesArray = [
+    UserTaxTypes.COMMON,
+    UserTaxTypes.PATENT,
+    UserTaxTypes.SIMPLIFIED,
+  ];
+
+  userTaxTypes = UserTaxTypes;
 
   userTypes = UserTypes;
 
@@ -30,7 +39,8 @@ export class EditProfileComponent implements OnInit, OnDestroy {
   constructor(
     private fb: UntypedFormBuilder,
     private storage: Storage,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -52,39 +62,71 @@ export class EditProfileComponent implements OnInit, OnDestroy {
     this.form = this.fb.group({
       userType: this.fb.control(null, Validators.required),
       userPhoto: this.fb.control(null, Validators.required),
-      userPassport: this.fb.control(null, Validators.required),
+      userDocument: this.fb.control(null, Validators.required),
     });
   }
 
   initSubscriptions() {
-    this.form.controls['userType'].valueChanges.pipe(takeUntil(this.destroyed$)).subscribe((value) => {
-      switch (value) {
-        case UserTypes.CARRIER:
+    this.form.controls['userType'].valueChanges
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((value) => {
+        if (value === UserTypes.CARRIER) {
           this.addCarrierForm();
-          break;
-        case UserTypes.DRIVER:
-          this.addDriverForm();
-          break;
-        case UserTypes.PRODUCER:
+        } else {
           this.addProducerForm();
-          break;
-      }
-    })
+        }
+      });
   }
 
   addCarrierForm() {
-    this.form.addControl('companyName', this.fb.control(null, Validators.required));
-    this.form.addControl('companyINN', this.fb.control(null, [Validators.required, Validators.minLength(10), Validators.maxLength(12)]));
-    this.form.addControl('companyOGRN', this.fb.control(null, [Validators.required, Validators.minLength(13), Validators.maxLength(13)]));
-    this.form.addControl('companyKPP', this.fb.control(null, [Validators.required, Validators.minLength(9), Validators.maxLength(9)]));
-  }
-
-  addDriverForm() {
-
+    this.addLegalTypeForm();
   }
 
   addProducerForm() {
+    this.addLegalTypeForm();
+  }
 
+  addLegalTypeForm() {
+    this.form.addControl(
+      'companyName',
+      this.fb.control(null, Validators.required)
+    );
+    this.form.addControl(
+      'companyINN',
+      this.fb.control(null, [
+        Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(12),
+      ])
+    );
+    this.form.addControl(
+      'companyOGRN',
+      this.fb.control(null, [
+        Validators.required,
+        Validators.minLength(13),
+        Validators.maxLength(13),
+      ])
+    );
+    this.form.addControl(
+      'companyKPP',
+      this.fb.control(null, [
+        Validators.required,
+        Validators.minLength(9),
+        Validators.maxLength(9),
+      ])
+    );
+    this.form.addControl(
+      'companyAddress',
+      this.fb.control(null, Validators.required)
+    );
+    this.form.addControl(
+      'companyTaxType',
+      this.fb.control(null, Validators.required)
+    );
+    this.form.addControl(
+      'companyPhone',
+      this.fb.control(null, Validators.required)
+    );
   }
 
   onFileSelected(event: Event, type: string) {
@@ -97,9 +139,9 @@ export class EditProfileComponent implements OnInit, OnDestroy {
     }
 
     if (type === 'photo') {
-      imgRef = ref(this.storage, `users/${this.userId}/avatar`);
+      imgRef = ref(this.storage, `companies/${this.userId}/avatar`);
     } else {
-      imgRef = ref(this.storage, `users/${this.userId}/document`);
+      imgRef = ref(this.storage, `companies/${this.userId}/document`);
     }
 
     uploadBytes(imgRef, this.userPhotoFile)
@@ -108,9 +150,16 @@ export class EditProfileComponent implements OnInit, OnDestroy {
         if (type === 'photo') {
           this.form.patchValue({ userPhoto: this.userPhotoFile });
         } else {
-          this.form.patchValue({ userPassport: this.userPhotoFile });
+          this.form.patchValue({ userDocument: this.userPhotoFile });
         }
       })
       .catch((error) => console.log(error));
+  }
+
+  next() {
+    const userData = { ...this.form.value, userId: this.userId };
+    this.loginService.registerNewUser(userData, this.userId!).subscribe(() => {
+      this.router.navigate(['/profile']);
+    });
   }
 }

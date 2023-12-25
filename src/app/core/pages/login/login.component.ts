@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
         if(mode === 'signUp') {
           this.router.navigate(['/edit-profile'])
         } else {
-          this.router.navigate(['/user-account'])
+          this.router.navigate(['/profile'])
         }
         this.errorMessage = '';
       },

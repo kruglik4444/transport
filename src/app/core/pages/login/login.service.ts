@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
-import { BehaviorSubject, throwError } from 'rxjs';
+import { BehaviorSubject, of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { User } from '../../models/user.model';
 import { environment } from 'src/environments/environment';
+import { UserTypes } from '../../enums/user-types.enum';
 
 export interface AuthResponeData {
   idToken: string;
@@ -115,7 +116,7 @@ export class LoginService {
   }
 
   registerNewUser(data: any, userId: string) {
-    return this.http.post(`https://krugwagen-default-rtdb.firebaseio.com/clients/${userId}.json`, data)
+    return this.http.post(`https://krugwagen-default-rtdb.firebaseio.com/companies/${userId}.json`, data)
   }
 
   private handleAuthentication(email: string, userId: string, token: string, expiresIn: number) {

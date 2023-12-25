@@ -1,0 +1,63 @@
+<mat-card *ngIf="company && photoURL">
+  <mat-card-header>
+    <mat-card-title>
+      {{ company.companyName }}
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="tw-flex tw-gap-10">
+      <div class="tw-flex tw-flex-col">
+        <img class="tw-h-[300px] tw-mb-3" src="{{ photoURL }}" />
+        <button (click)="showDocument()" mat-stroked-button color="primary">
+          Показать документ
+        </button>
+      </div>
+      <div>
+        <mat-list>
+          <mat-list-item>
+            <span class="title" matListItemTitle>Адрес</span>
+            <span class="line" matListItemLine>{{ company.companyAddress }}</span>
+          </mat-list-item>
+
+          <mat-list-item>
+            <span class="title" matListItemTitle>Номер телефона</span>
+            <span class="line" matListItemLine>{{ company.companyPhone }}</span>
+          </mat-list-item>
+
+          <mat-list-item>
+            <span class="title" matListItemTitle>Количество трансопрта</span>
+            <span class="line" matListItemLine>40</span>
+          </mat-list-item>
+
+          <mat-list-item>
+            <span class="title" matListItemTitle>Лет в работе</span>
+            <span class="line" matListItemLine>20</span>
+          </mat-list-item>
+        </mat-list>
+      </div>
+      <div>
+        <mat-list>
+          <mat-list-item>
+            <span class="title" matListItemTitle>Система налогообложения</span>
+            <span class="line" matListItemLine>{{ company.companyTaxType }}</span>
+          </mat-list-item>
+
+          <mat-list-item>
+            <span class="title" matListItemTitle>ИНН</span>
+            <span class="line" matListItemLine>{{ company.companyINN }}</span>
+          </mat-list-item>
+
+          <mat-list-item>
+            <span class="title" matListItemTitle>ОГРН</span>
+            <span class="line" matListItemLine>{{ company.companyOGRN }}</span>
+          </mat-list-item>
+
+          <mat-list-item>
+            <span class="title" matListItemTitle>КПП</span>
+            <span class="line" matListItemLine>{{ company.companyKPP }}</span>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

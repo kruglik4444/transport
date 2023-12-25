@@ -18,4 +18,8 @@ export class HeaderComponent implements OnInit{
     this.user$ = this.loginService.user;
   }
 
+  logout() {
+    this.loginService.logOut();
+  }
+
 }
