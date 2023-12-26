@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, exhaustMap, map, take } from 'rxjs';
+import { BehaviorSubject, Observable, exhaustMap, map, take } from 'rxjs';
 import { LoginService } from '../core/pages/login/login.service';
 import { ProfileInterface } from '../core/interfaces/common.interfaces';
 
@@ -9,6 +9,8 @@ import { ProfileInterface } from '../core/interfaces/common.interfaces';
 })
 export class StorageService {
   constructor(private http: HttpClient, private loginService: LoginService) {}
+
+  profileType$ = new BehaviorSubject<string | null>(null);
 
   getProfileData(): Observable<ProfileInterface> {
     return this.loginService.user.pipe(
@@ -22,6 +24,7 @@ export class StorageService {
           )
           .pipe(
             map((responseData) => {
+              this.profileType$.next(Object.values(responseData)[0].userType);
               return Object.values(responseData)[0];
             })
           );

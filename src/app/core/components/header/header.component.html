@@ -1,4 +1,4 @@
-<mat-toolbar *ngIf="user$ | async" color="primary">
+<mat-toolbar *ngIf="user$ | async as user" color="primary">
   <button
     mat-icon-button
     class="example-icon"
@@ -7,6 +7,10 @@
     <mat-icon>menu</mat-icon>
   </button>
   <span>KrugWagen</span>
+  <div *ngIf="profileType === UserTypes.CARRIER" class="tw-flex tw-gap-x-5 tw-ml-5 tw-mt-1">
+    <button mat-flat-button color="primary">Создать заявку</button>
+    <button mat-flat-button color="primary">Найти рейс</button>
+  </div>
   <span class="example-spacer"></span>
   <button
     mat-icon-button
