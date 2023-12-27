@@ -4,14 +4,14 @@ import { User } from '../../models/user.model';
 import { LoginService } from '../../pages/login/login.service';
 import { StorageService } from 'src/app/storage/storage.service';
 import { UserTypes } from '../../enums/user-types.enum';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit, OnDestroy{
-
+export class HeaderComponent implements OnInit, OnDestroy {
   user$!: BehaviorSubject<User | null>;
 
   profileType!: string | null;
@@ -20,11 +20,15 @@ export class HeaderComponent implements OnInit, OnDestroy{
 
   destroyed$ = new Subject<void>();
 
-  constructor(private loginService: LoginService, private storageService: StorageService) {}
+  constructor(
+    private loginService: LoginService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.user$ = this.loginService.user;
-    this.storageService.profileType$.pipe(takeUntil(this.destroyed$)).subscribe((profileType) => {
+    this.loginService.profileType$.pipe(takeUntil(this.destroyed$))
+    .subscribe((profileType) => {
       this.profileType = profileType;
     })
   }
@@ -34,8 +38,15 @@ export class HeaderComponent implements OnInit, OnDestroy{
     this.destroyed$.complete();
   }
 
+  addTruck() {
+    this.router.navigate(['/profile/add-truck'])
+  }
+
+  goToProfile() {
+    this.router.navigate(['/profile'])
+  }
+
   logout() {
     this.loginService.logOut();
   }
-
 }

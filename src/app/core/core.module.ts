@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NotificationComponent } from './components/notification/notification.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    MatStepperModule,
   ],
   exports: [HeaderComponent, LoginComponent, EditProfileComponent],
 })

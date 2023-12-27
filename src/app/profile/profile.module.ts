@@ -6,9 +6,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { AddTruckComponent } from './components/add-truck/add-truck.component';
 
 @NgModule({
-  declarations: [ProfileComponent],
+  declarations: [ProfileComponent, AddTruckComponent],
   imports: [
     CommonModule,
     ProfileRoutingModule,

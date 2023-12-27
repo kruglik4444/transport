@@ -22,6 +22,8 @@ export interface AuthResponeData {
 export class LoginService {
   user = new BehaviorSubject<User | null>(null);
 
+  profileType$ = new BehaviorSubject<string | null>(null);
+
   private tokenExpirationTimer: any;
 
   constructor(
@@ -103,6 +105,7 @@ export class LoginService {
     this.user.next(null);
     this.router.navigate(['/login']);
     localStorage.removeItem('userData');
+    localStorage.removeItem('profileType');
     if (this.tokenExpirationTimer) {
       clearTimeout(this.tokenExpirationTimer);
     }

@@ -10,8 +10,6 @@ import { ProfileInterface } from '../core/interfaces/common.interfaces';
 export class StorageService {
   constructor(private http: HttpClient, private loginService: LoginService) {}
 
-  profileType$ = new BehaviorSubject<string | null>(null);
-
   getProfileData(): Observable<ProfileInterface> {
     return this.loginService.user.pipe(
       take(1),
@@ -24,7 +22,7 @@ export class StorageService {
           )
           .pipe(
             map((responseData) => {
-              this.profileType$.next(Object.values(responseData)[0].userType);
+              this.loginService.profileType$.next(Object.values(responseData)[0].userType);
               return Object.values(responseData)[0];
             })
           );

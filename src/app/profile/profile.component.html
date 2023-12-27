@@ -5,7 +5,7 @@
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <div class="tw-flex tw-gap-10">
+    <div class="tw-flex tw-justify-between">
       <div class="tw-flex tw-flex-col">
         <img class="tw-h-[300px] tw-mb-3" src="{{ photoURL }}" />
         <button (click)="showDocument()" mat-stroked-button color="primary">
@@ -15,7 +15,7 @@
       <div>
         <mat-list>
           <mat-list-item>
-            <span class="title" matListItemTitle>Адрес</span>
+            <span class="title" matListItemTitle>Город</span>
             <span class="line" matListItemLine>{{ company.companyAddress }}</span>
           </mat-list-item>
 
