@@ -1,0 +1,62 @@
+<mat-card>
+  <form [formGroup]="form">
+    <mat-card-header>
+      <mat-card-title> Введите контакты организации </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="tw-flex tw-gap-x-5">
+            <mat-form-field class="tw-basis-1/4">
+                <mat-label>Страна</mat-label>
+                <input
+                  formControlName="companyCountry"
+                  type="text"
+                  matInput
+                  placeholder="Введи страну"
+                />
+                <mat-error *ngIf="form.controls['companyCountry'].hasError('required')">
+                  Введи страну
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="tw-basis-1/4">
+                <mat-label>Город</mat-label>
+                <input
+                  formControlName="companyCity"
+                  type="text"
+                  matInput
+                  placeholder="Введи город"
+                />
+                <mat-error *ngIf="form.controls['companyCity'].hasError('required')">
+                  Введи город
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="tw-basis-1/4">
+                <mat-label>Телефон</mat-label>
+                <input
+                  formControlName="companyPhone"
+                  type="text"
+                  matInput
+                  placeholder="Введи телефон"
+                />
+                <mat-error *ngIf="form.controls['companyPhone'].hasError('required')">
+                  Введи телефон
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="tw-basis-1/4">
+                <mat-label>E-mail</mat-label>
+                <input
+                  formControlName="companyEmail"
+                  type="text"
+                  matInput
+                  placeholder="Введи e-mail"
+                />
+                <mat-error *ngIf="form.controls['companyEmail'].hasError('required')">
+                  Введи e-mail
+                </mat-error>
+              </mat-form-field>
+        </div>
+    </mat-card-content>
+  </form>
+</mat-card>

@@ -1,0 +1,128 @@
+<mat-card>
+  <form [formGroup]="form">
+    <mat-card-header>
+      <mat-card-title> Введите информацию об организации </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="tw-flex tw-gap-x-5">
+        <mat-form-field class="tw-basis-1/4">
+          <mat-label>Название организации</mat-label>
+          <input
+            formControlName="companyName"
+            type="text"
+            matInput
+            placeholder="Введи название организации"
+          />
+          <mat-error *ngIf="form.controls['companyName'].hasError('required')">
+            Введи название организации
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="tw-basis-1/4">
+          <mat-label>Тип организации</mat-label>
+          <mat-select formControlName="companyOrganisationType">
+            <mat-option
+              [value]="type"
+              *ngFor="let type of organisationTypes; trackByIndex"
+            >
+              {{ type }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="
+              form.controls['companyOrganisationType'].hasError('required')
+            "
+          >
+            Выбери тип организации
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="tw-basis-1/4">
+          <mat-label>Система налогооблажения</mat-label>
+          <mat-select formControlName="companyTaxType">
+            <mat-option
+              [value]="type"
+              *ngFor="let type of taxTypes; trackByIndex"
+            >
+              {{ type }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="form.controls['companyTaxType'].hasError('required')"
+          >
+            Выбери тип налогооблажения
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="tw-basis-1/4">
+          <mat-label>НДС</mat-label>
+          <mat-select formControlName="companyVAT">
+            <mat-option
+              [value]="type"
+              *ngFor="let type of vatTypes; trackByIndex"
+            >
+              {{ type }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.controls['companyVAT'].hasError('required')">
+            Выбери тип НДС
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="tw-flex tw-gap-x-5">
+        <mat-form-field class="tw-basis-1/4">
+          <mat-label>ИНН организации</mat-label>
+          <input
+            formControlName="companyINN"
+            type="text"
+            matInput
+            placeholder="Введи ИНН организации"
+          />
+          <mat-error *ngIf="form.controls['companyINN'].hasError('required')">
+            Введи ИНН организации
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="tw-basis-1/4">
+          <mat-label>КПП организации</mat-label>
+          <input
+            formControlName="companyKPP"
+            type="text"
+            matInput
+            placeholder="Введи КПП организации"
+          />
+          <mat-error *ngIf="form.controls['companyKPP'].hasError('required')">
+            Введи КПП организации
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="tw-basis-1/4">
+          <mat-label>ОГРН организации</mat-label>
+          <input
+            formControlName="companyORGN"
+            type="text"
+            matInput
+            placeholder="Введи ОГРН организации"
+          />
+          <mat-error *ngIf="form.controls['companyORGN'].hasError('required')">
+            Введи ОГРН организации
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="tw-basis-1/4">
+          <mat-label>Код ATI</mat-label>
+          <input
+            formControlName="companyATI"
+            type="text"
+            matInput
+            placeholder="Введи код ATI"
+          />
+          <mat-error *ngIf="form.controls['companyATI'].hasError('required')">
+            Введи код ATI
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+  </form>
+</mat-card>

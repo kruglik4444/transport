@@ -14,6 +14,8 @@ import { NotificationComponent } from './components/notification/notification.co
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatStepperModule } from '@angular/material/stepper';
+import { GeneralInfoComponent } from './pages/edit-profile/components/general-info/general-info.component';
+import { ContactInfoComponent } from './pages/edit-profile/components/contact-info/contact-info.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { MatStepperModule } from '@angular/material/stepper';
     LoginComponent,
     EditProfileComponent,
     NotificationComponent,
+    GeneralInfoComponent,
+    ContactInfoComponent,
   ],
   imports: [
     CommonModule,
