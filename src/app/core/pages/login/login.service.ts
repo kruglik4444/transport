@@ -5,7 +5,7 @@ import { BehaviorSubject, of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { User } from '../../models/user.model';
 import { environment } from 'src/environments/environment';
-import { UserTypes } from '../../enums/user-types.enum';
+import { CompanyInfo } from '../edit-profile/edit-profile.dto';
 
 export interface AuthResponeData {
   idToken: string;
@@ -96,7 +96,8 @@ export class LoginService {
     if (loadedUser.token) {
       this.user.next(loadedUser);
       const expirationDuration =
-        new Date(userData._tokenExpirationDate).getTime() - new Date().getTime();
+        new Date(userData._tokenExpirationDate).getTime() -
+        new Date().getTime();
       this.autoLogout(expirationDuration);
     }
   }
@@ -118,11 +119,19 @@ export class LoginService {
     }, expirationDuration);
   }
 
-  registerNewUser(data: any, userId: string) {
-    return this.http.post(`https://krugwagen-default-rtdb.firebaseio.com/companies/${userId}.json`, data)
+  registerNewUser(data: CompanyInfo, userId: string) {
+    return this.http.post(
+      `https://krugwagen-default-rtdb.firebaseio.com/companies/${userId}.json`,
+      data,
+    );
   }
 
-  private handleAuthentication(email: string, userId: string, token: string, expiresIn: number) {
+  private handleAuthentication(
+    email: string,
+    userId: string,
+    token: string,
+    expiresIn: number,
+  ) {
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
     const user = new User(email, userId, token, expirationDate);
     this.user.next(user);

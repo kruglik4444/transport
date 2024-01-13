@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
 import { User } from '../../models/user.model';
 import { LoginService } from '../../pages/login/login.service';
@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   user$!: BehaviorSubject<User | null>;

@@ -16,6 +16,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatStepperModule } from '@angular/material/stepper';
 import { GeneralInfoComponent } from './pages/edit-profile/components/general-info/general-info.component';
 import { ContactInfoComponent } from './pages/edit-profile/components/contact-info/contact-info.component';
+import { OnlyNumbersDirective } from './directives/only-numbers.directive';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { ContactInfoComponent } from './pages/edit-profile/components/contact-in
     NotificationComponent,
     GeneralInfoComponent,
     ContactInfoComponent,
+    OnlyNumbersDirective,
   ],
   imports: [
     CommonModule,
@@ -39,6 +41,11 @@ import { ContactInfoComponent } from './pages/edit-profile/components/contact-in
     MatSelectModule,
     MatStepperModule,
   ],
-  exports: [HeaderComponent, LoginComponent, EditProfileComponent],
+  exports: [
+    HeaderComponent,
+    LoginComponent,
+    EditProfileComponent,
+    OnlyNumbersDirective,
+  ],
 })
 export class CoreModule {}

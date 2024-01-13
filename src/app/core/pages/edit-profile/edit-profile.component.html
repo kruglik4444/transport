@@ -25,80 +25,92 @@
     </form>
   </mat-card>
 
-  <app-general-info (formValidated)="generalInfoFormValidate($event)"></app-general-info>
+  <app-general-info
+    (formValidated)="generalInfoFormValidate($event)"
+  ></app-general-info>
 
-  <app-contact-info (formValidated)="contactInfoFormValidate($event)"></app-contact-info>
+  <app-contact-info
+    (formValidated)="contactInfoFormValidate($event)"
+  ></app-contact-info>
 
   <mat-card>
     <mat-card-header>
-      <mat-card-title>
-        Загрузите сканы документов
-      </mat-card-title>
+      <mat-card-title> Загрузите сканы документов </mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <div class="tw-flex tw-gap-5 tw-mt-5">
         <button
-            color="primary"
-            mat-stroked-button
-            (click)="companyRequsitsInput.click()"
-          >
-            <span>Реквизиты компании</span>
-            <input
-              formControlname="companyRequsits"
-              class="tw-hidden"
-              #companyRequsitsInput
-              type="file"
-              (change)="onFileSelected($event, 'companyRequsits')"
-            />
-          </button>
-          <mat-icon
-            *ngIf="form.controls['companyRequsits'].valid"
-            class="tw-text-green-600 tw-mt-1"
-            >check_circle</mat-icon
-          >
+          color="primary"
+          mat-stroked-button
+          (click)="companyRequsitsInput.click()"
+        >
+          <span>Реквизиты компании</span>
+          <input
+            formControlname="companyRequsits"
+            class="tw-hidden"
+            #companyRequsitsInput
+            type="file"
+            (change)="onFileSelected($event, 'companyRequsits')"
+          />
+        </button>
+        <mat-icon
+          *ngIf="form.controls['companyRequsits'].valid"
+          class="tw-text-green-600 tw-mt-1"
+          >check_circle</mat-icon
+        >
       </div>
       <div class="tw-flex tw-gap-5 tw-mt-5">
         <button
-            color="primary"
-            mat-stroked-button
-            (click)="companyInnAccountInput.click()"
-          >
-            <span>Свидетельство ИНН</span>
-            <input
-              formControlname="companyInnAccount"
-              class="tw-hidden"
-              #companyInnAccountInput
-              type="file"
-              (change)="onFileSelected($event, 'companyInnAccount')"
-            />
-          </button>
-          <mat-icon
-            *ngIf="form.controls['companyInnAccount'].valid"
-            class="tw-text-green-600 tw-mt-1"
-            >check_circle</mat-icon
-          >
+          color="primary"
+          mat-stroked-button
+          (click)="companyInnAccountInput.click()"
+        >
+          <span>Свидетельство ИНН</span>
+          <input
+            formControlname="companyInnAccount"
+            class="tw-hidden"
+            #companyInnAccountInput
+            type="file"
+            (change)="onFileSelected($event, 'companyInnAccount')"
+          />
+        </button>
+        <mat-icon
+          *ngIf="form.controls['companyInnAccount'].valid"
+          class="tw-text-green-600 tw-mt-1"
+          >check_circle</mat-icon
+        >
       </div>
       <div class="tw-flex tw-gap-5 tw-mt-5">
         <button
-            color="primary"
-            mat-stroked-button
-            (click)="companyRegistrationInput.click()"
-          >
-            <span>Свидетельство о регистрации</span>
-            <input
-              formControlname="companyRegistration"
-              class="tw-hidden"
-              #companyRegistrationInput
-              type="file"
-              (change)="onFileSelected($event, 'companyRegistration')"
-            />
-          </button>
-          <mat-icon
-            *ngIf="form.controls['companyRegistration'].valid"
-            class="tw-text-green-600 tw-mt-1"
-            >check_circle</mat-icon
-          >
+          color="primary"
+          mat-stroked-button
+          (click)="companyRegistrationInput.click()"
+        >
+          <span>Свидетельство о регистрации</span>
+          <input
+            formControlname="companyRegistration"
+            class="tw-hidden"
+            #companyRegistrationInput
+            type="file"
+            (change)="onFileSelected($event, 'companyRegistration')"
+          />
+        </button>
+        <mat-icon
+          *ngIf="form.controls['companyRegistration'].valid"
+          class="tw-text-green-600 tw-mt-1"
+          >check_circle</mat-icon
+        >
       </div>
     </mat-card-content>
   </mat-card>
+  <div class="tw-flex tw-justify-end">
+    <button
+      (click)="next()"
+      [disabled]="(!this.form.valid || !generalFormValid || !contactFormValid)"
+      mat-raised-button
+      color="primary"
+    >
+      Продолжить
+    </button>
+  </div>
 </div>

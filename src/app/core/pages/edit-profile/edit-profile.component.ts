@@ -11,16 +11,27 @@ import {
   Validators,
 } from '@angular/forms';
 import { UserTypes } from '../../enums/user-types.enum';
-import { EditProfileValidationEvent } from './edit-profile.dto';
+import {
+  CompanyInfo,
+  ContactInfoDTO,
+  EditProfileValidationEvent,
+  GeneralInfoDTO,
+} from './edit-profile.dto';
 import { Subject, takeUntil } from 'rxjs';
-import { Storage, StorageReference, ref, uploadBytes } from '@angular/fire/storage';
+import {
+  Storage,
+  StorageReference,
+  ref,
+  uploadBytes,
+} from '@angular/fire/storage';
 import { LoginService } from '../login/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
   styleUrls: ['./edit-profile.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditProfileComponent implements OnInit, OnDestroy {
   userTypesArray = [UserTypes.CARRIER, UserTypes.PRODUCER];
@@ -37,15 +48,21 @@ export class EditProfileComponent implements OnInit, OnDestroy {
 
   destroyed$ = new Subject<void>();
 
+  generalInfo!: GeneralInfoDTO;
+
+  contactInfo!: ContactInfoDTO;
+
   constructor(
     private fb: UntypedFormBuilder,
     private storage: Storage,
     private loginService: LoginService,
     private cdr: ChangeDetectorRef,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
     this.initForm();
+    this.initSubscriptions();
   }
 
   ngOnDestroy(): void {
@@ -72,10 +89,12 @@ export class EditProfileComponent implements OnInit, OnDestroy {
 
   generalInfoFormValidate(event: EditProfileValidationEvent) {
     this.generalFormValid = event.isValid;
+    this.generalInfo = event.formValue;
   }
 
   contactInfoFormValidate(event: EditProfileValidationEvent) {
     this.contactFormValid = event.isValid;
+    this.contactInfo = event.formValue;
   }
 
   onFileSelected(event: Event, type: string) {
@@ -103,5 +122,17 @@ export class EditProfileComponent implements OnInit, OnDestroy {
         this.cdr.markForCheck();
       })
       .catch((error) => console.log(error));
+  }
+
+  next() {
+    const companyData: CompanyInfo = {
+      ...this.form.value,
+      ...this.contactInfo,
+      ...this.generalInfo,
+      userId: this.userId,
+    };
+    this.loginService.registerNewUser(companyData, this.userId!).subscribe(() => {
+      this.router.navigate(['/profile']);
+    });
   }
 }
