@@ -101,6 +101,27 @@
           >check_circle</mat-icon
         >
       </div>
+      <div class="tw-flex tw-gap-5 tw-mt-5">
+        <button
+          color="primary"
+          mat-stroked-button
+          (click)="companyAvatarInput.click()"
+        >
+          <span>Фотография профиля</span>
+          <input
+            formControlname="companyAvatar"
+            class="tw-hidden"
+            #companyAvatarInput
+            type="file"
+            (change)="onFileSelected($event, 'companyAvatar')"
+          />
+        </button>
+        <mat-icon
+          *ngIf="form.controls['companyAvatar'].valid"
+          class="tw-text-green-600 tw-mt-1"
+          >check_circle</mat-icon
+        >
+      </div>
     </mat-card-content>
   </mat-card>
   <div class="tw-flex tw-justify-end">

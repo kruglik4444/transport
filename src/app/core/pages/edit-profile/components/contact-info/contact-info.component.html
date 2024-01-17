@@ -35,9 +35,9 @@
                 <mat-label>Телефон</mat-label>
                 <input
                   formControlName="companyPhone"
-                  appOnlyNumbers
                   type="text"
                   matInput
+                  mask='+0(000)-000-00-00'
                   placeholder="Введи телефон"
                 />
                 <mat-error *ngIf="form.controls['companyPhone'].hasError('required')">

@@ -76,6 +76,7 @@ export class EditProfileComponent implements OnInit, OnDestroy {
       companyRequsits: this.fb.control(null, Validators.required),
       companyRegistration: this.fb.control(null, Validators.required),
       companyInnAccount: this.fb.control(null, Validators.required),
+      companyAvatar: this.fb.control(null, Validators.required),
     });
   }
 
@@ -109,15 +110,20 @@ export class EditProfileComponent implements OnInit, OnDestroy {
     imgRef = ref(this.storage, `companies/${this.userId}/${type}`);
 
     uploadBytes(imgRef, this.document)
-      .then((x) => {
-        if (type === 'companyRequsits') {
-          this.form.patchValue({ companyRequsits: this.document });
-        }
-        if (type === 'companyRegistration') {
-          this.form.patchValue({ companyRegistration: this.document });
-        }
-        if (type === 'companyInnAccount') {
-          this.form.patchValue({ companyInnAccount: this.document });
+      .then(() => {
+        switch (type) {
+          case 'companyRequsits':
+            this.form.patchValue({ companyRequsits: this.document });
+            break;
+          case 'companyRegistration':
+            this.form.patchValue({ companyRegistration: this.document });
+            break;
+          case 'companyInnAccount':
+            this.form.patchValue({ companyInnAccount: this.document });
+            break;
+          case 'companyAvatar':
+            this.form.patchValue({ companyAvatar: this.document });
+            break;
         }
         this.cdr.markForCheck();
       })
@@ -131,8 +137,10 @@ export class EditProfileComponent implements OnInit, OnDestroy {
       ...this.generalInfo,
       userId: this.userId,
     };
-    this.loginService.registerNewUser(companyData, this.userId!).subscribe(() => {
-      this.router.navigate(['/profile']);
-    });
+    this.loginService
+      .registerNewUser(companyData, this.userId!)
+      .subscribe(() => {
+        this.router.navigate(['/profile']);
+      });
   }
 }

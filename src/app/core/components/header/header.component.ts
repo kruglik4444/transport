@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
 import { User } from '../../models/user.model';
 import { LoginService } from '../../pages/login/login.service';
@@ -23,7 +23,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(
     private loginService: LoginService,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -31,6 +32,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.loginService.profileType$.pipe(takeUntil(this.destroyed$))
     .subscribe((profileType) => {
       this.profileType = profileType;
+      this.cdr.markForCheck();
     })
   }
 

@@ -1,63 +1,86 @@
-<mat-card *ngIf="company && photoURL">
+<mat-card *ngIf="company && documentURLs">
   <mat-card-header>
     <mat-card-title>
       {{ company.companyName }}
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <div class="tw-flex tw-justify-between">
-      <div class="tw-flex tw-flex-col">
-        <img class="tw-h-[300px] tw-mb-3" src="{{ photoURL }}" />
-        <button (click)="showDocument()" mat-stroked-button color="primary">
-          Показать документ
+    <div class="tw-flex tw-gap-x-10">
+      <div class="tw-flex tw-flex-col tw-gap-y-5">
+        <img class="tw-h-[300px]" src="{{ documentURLs[0] }}" />
+        <button (click)="showDocument(1)" mat-stroked-button color="primary">
+          Свидетельство о регистрации 
+        </button>
+        <button (click)="showDocument(2)" mat-stroked-button color="primary">
+          Свидетельство ИНН
+        </button>
+        <button (click)="showDocument(3)" mat-stroked-button color="primary">
+          Реквизиты компании
         </button>
       </div>
-      <div>
-        <mat-list>
-          <mat-list-item>
-            <span class="title" matListItemTitle>Город</span>
-            <span class="line" matListItemLine>{{ company.companyAddress }}</span>
-          </mat-list-item>
+      <mat-list>
+        <mat-list-item>
+          <span matListItemTitle>Тип профиля</span>
+          <span>{{company.userType}}</span>
+        </mat-list-item>
 
-          <mat-list-item>
-            <span class="title" matListItemTitle>Номер телефона</span>
-            <span class="line" matListItemLine>{{ company.companyPhone }}</span>
-          </mat-list-item>
+        <mat-list-item>
+          <span matListItemTitle>Страна</span>
+          <span>{{company.companyCountry}}</span>
+        </mat-list-item>
 
-          <mat-list-item>
-            <span class="title" matListItemTitle>Количество трансопрта</span>
-            <span class="line" matListItemLine>40 единиц</span>
-          </mat-list-item>
+        <mat-list-item>
+          <span matListItemTitle>Город</span>
+          <span>{{company.companyCity}}</span>
+        </mat-list-item>
 
-          <mat-list-item>
-            <span class="title" matListItemTitle>Лет в работе</span>
-            <span class="line" matListItemLine>20</span>
-          </mat-list-item>
-        </mat-list>
-      </div>
-      <div>
-        <mat-list>
-          <mat-list-item>
-            <span class="title" matListItemTitle>Система налогообложения</span>
-            <span class="line" matListItemLine>{{ company.companyTaxType }}</span>
-          </mat-list-item>
+        <mat-list-item>
+          <span matListItemTitle>E-mail</span>
+          <span>{{company.companyEmail}}</span>
+        </mat-list-item>
 
-          <mat-list-item>
-            <span class="title" matListItemTitle>ИНН</span>
-            <span class="line" matListItemLine>{{ company.companyINN }}</span>
-          </mat-list-item>
+        <mat-list-item>
+          <span matListItemTitle>Телефон</span>
+          <span>{{company.companyPhone | mask: '+0(000)-000-00-00'}}</span>
+        </mat-list-item>
 
-          <mat-list-item>
-            <span class="title" matListItemTitle>ОГРН</span>
-            <span class="line" matListItemLine>{{ company.companyOGRN }}</span>
-          </mat-list-item>
+        <mat-list-item>
+          <span matListItemTitle>Код ATI</span>
+          <span>{{company.companyATI}}</span>
+        </mat-list-item>
+      </mat-list>
 
-          <mat-list-item>
-            <span class="title" matListItemTitle>КПП</span>
-            <span class="line" matListItemLine>{{ company.companyKPP }}</span>
-          </mat-list-item>
-        </mat-list>
-      </div>
+      <mat-list>
+        <mat-list-item>
+          <span matListItemTitle>Тип организации</span>
+          <span>{{company.companyOrganisationType}}</span>
+        </mat-list-item>
+
+        <mat-list-item>
+          <span matListItemTitle>Система налогооблажения</span>
+          <span>{{company.companyTaxType}}</span>
+        </mat-list-item>
+
+        <mat-list-item>
+          <span matListItemTitle>Работа с НДС</span>
+          <span>{{company.companyVAT}}</span>
+        </mat-list-item>
+
+        <mat-list-item>
+          <span matListItemTitle>ИНН</span>
+          <span>{{company.companyINN}}</span>
+        </mat-list-item>
+
+        <mat-list-item>
+          <span matListItemTitle>ОГРН</span>
+          <span>{{company.companyORGN}}</span>
+        </mat-list-item>
+
+        <mat-list-item>
+          <span matListItemTitle>КПП</span>
+          <span>{{company.companyKPP}}</span>
+        </mat-list-item>
+      </mat-list>
     </div>
   </mat-card-content>
 </mat-card>

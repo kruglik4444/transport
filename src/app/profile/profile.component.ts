@@ -3,8 +3,6 @@ import { StorageService } from '../storage/storage.service';
 import { Observable } from 'rxjs';
 import { ProfileInterface } from '../core/interfaces/common.interfaces';
 import { Storage, getDownloadURL, listAll, ref } from '@angular/fire/storage';
-import { LoginService } from '../core/pages/login/login.service';
-import { User } from '../core/models/user.model';
 import {
   MAT_DIALOG_DATA,
   MatDialog,
@@ -21,14 +19,12 @@ import { MatIconModule } from '@angular/material/icon';
 export class ProfileComponent implements OnInit {
   company!: ProfileInterface;
 
-  documentURL!: string;
-
-  photoURL!: string;
+  documentURLs: string[] = [];
 
   constructor(
     private storageService: StorageService,
     private storage: Storage,
-    public dialog: MatDialog
+    public dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -37,6 +33,7 @@ export class ProfileComponent implements OnInit {
       .subscribe((company: ProfileInterface) => {
         this.company = company;
         this.getImages();
+        console.log(this.company);
       });
   }
 
@@ -44,20 +41,17 @@ export class ProfileComponent implements OnInit {
     const imagesRef = ref(this.storage, `companies/${this.company.userId}`);
 
     listAll(imagesRef).then(async (images) => {
-      let photos = [];
       for (let image of images.items) {
         const url = await getDownloadURL(image);
-        photos.push(url);
+        this.documentURLs.push(url);
       }
-      this.documentURL = photos[1];
-      this.photoURL = photos[0];
     });
   }
 
-  showDocument() {
+  showDocument(index: number) {
     this.dialog.open(DialogPassport, {
       data: {
-        passport: this.documentURL,
+        img: this.documentURLs[index],
       },
     });
   }
@@ -72,7 +66,7 @@ export class ProfileComponent implements OnInit {
       </button>
     </div>
     <div class="tw-overflow-hidden">
-      <img class="tw-max-w-[50vw]" src="{{ data.passport }}" />
+      <img class="tw-max-w-[50vw]" src="{{ data.img }}" />
     </div>
   `,
   standalone: true,

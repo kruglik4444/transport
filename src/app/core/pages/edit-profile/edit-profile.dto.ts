@@ -27,4 +27,5 @@ export interface CompanyInfo extends GeneralInfoDTO, ContactInfoDTO{
     companyRequsits: File;
     companyRegistration: File;
     companyInnAccount: File;
+    companyAvatar: File;
 }
