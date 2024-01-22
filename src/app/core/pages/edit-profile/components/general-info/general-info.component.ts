@@ -18,11 +18,11 @@ export class GeneralInfoComponent implements OnInit, OnDestroy{
 
   form!: UntypedFormGroup;
 
-  organisationTypes = [OrganisationTypes.INDIVIDUAL, OrganisationTypes.LEGAL];
+  organisationTypes = Object.values(OrganisationTypes);
 
-  taxTypes = [UserTaxTypes.COMMON, UserTaxTypes.PATENT, UserTaxTypes.SIMPLIFIED];
+  taxTypes = Object.values(UserTaxTypes);
 
-  vatTypes = [ValueAddedTaxTypes.HAS_VAT, ValueAddedTaxTypes.NO_VAT]
+  vatTypes = Object.values(ValueAddedTaxTypes);
 
   destroyed$ = new Subject<void>();
 

@@ -1,4 +1,4 @@
-<mat-card *ngIf="company && documentURLs">
+<mat-card *ngIf="company && documentURLs; else loading">
   <mat-card-header>
     <mat-card-title>
       {{ company.companyName }}
@@ -6,7 +6,7 @@
   </mat-card-header>
   <mat-card-content>
     <div class="tw-flex tw-gap-x-10">
-      <div class="tw-flex tw-flex-col tw-gap-y-5">
+      <div class="tw-flex tw-flex-col tw-gap-y-3">
         <img class="tw-h-[300px]" src="{{ documentURLs[0] }}" />
         <button (click)="showDocument(1)" mat-stroked-button color="primary">
           Свидетельство о регистрации 
@@ -84,3 +84,7 @@
     </div>
   </mat-card-content>
 </mat-card>
+
+<ng-template #loading>
+  <mat-spinner class="tw-m-auto tw-h-[600px]"></mat-spinner>
+</ng-template>

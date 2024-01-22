@@ -14,3 +14,12 @@ export interface ProfileInterface {
   userId: string;
   userType: string;
 }
+
+export interface TruckInterface {
+  model: string;
+  modelImage: string;
+  truckType: string;
+  trailerType: string;
+  trailerLift: number;
+  trailerSize: number;
+}

@@ -13,7 +13,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { NotificationComponent } from './components/notification/notification.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { MatStepperModule } from '@angular/material/stepper';
 import { GeneralInfoComponent } from './pages/edit-profile/components/general-info/general-info.component';
 import { ContactInfoComponent } from './pages/edit-profile/components/contact-info/contact-info.component';
 import { OnlyNumbersDirective } from './directives/only-numbers.directive';
@@ -40,7 +39,6 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatStepperModule,
     NgxMaskDirective,
     NgxMaskPipe,
   ],
@@ -50,8 +48,6 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
     EditProfileComponent,
     OnlyNumbersDirective,
   ],
-  providers: [
-    provideNgxMask(),
-  ]
+  providers: [provideNgxMask()],
 })
 export class CoreModule {}

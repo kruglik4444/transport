@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, exhaustMap, map, take } from 'rxjs';
+import { Observable, exhaustMap, map, take } from 'rxjs';
 import { LoginService } from '../core/pages/login/login.service';
-import { ProfileInterface } from '../core/interfaces/common.interfaces';
+import { ProfileInterface, TruckInterface } from '../core/interfaces/common.interfaces';
 
 @Injectable({
   providedIn: 'root',

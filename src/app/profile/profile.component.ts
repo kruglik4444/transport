@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { StorageService } from '../storage/storage.service';
 import { Observable } from 'rxjs';
 import { ProfileInterface } from '../core/interfaces/common.interfaces';
@@ -15,6 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileComponent implements OnInit {
   company!: ProfileInterface;
@@ -24,7 +25,8 @@ export class ProfileComponent implements OnInit {
   constructor(
     private storageService: StorageService,
     private storage: Storage,
-    public dialog: MatDialog,
+    private dialog: MatDialog,
+    private cdr: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {
@@ -33,7 +35,6 @@ export class ProfileComponent implements OnInit {
       .subscribe((company: ProfileInterface) => {
         this.company = company;
         this.getImages();
-        console.log(this.company);
       });
   }
 
@@ -45,6 +46,7 @@ export class ProfileComponent implements OnInit {
         const url = await getDownloadURL(image);
         this.documentURLs.push(url);
       }
+      this.cdr.markForCheck();
     });
   }
 

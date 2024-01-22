@@ -34,7 +34,7 @@ import { Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditProfileComponent implements OnInit, OnDestroy {
-  userTypesArray = [UserTypes.CARRIER, UserTypes.PRODUCER];
+  userTypesArray = Object.values(UserTypes);
 
   form!: UntypedFormGroup;
 
