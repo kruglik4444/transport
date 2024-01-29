@@ -17,6 +17,7 @@ import { GeneralInfoComponent } from './pages/edit-profile/components/general-in
 import { ContactInfoComponent } from './pages/edit-profile/components/contact-info/contact-info.component';
 import { OnlyNumbersDirective } from './directives/only-numbers.directive';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { SnackbarComponent } from './components/snackbar/snackbar.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
     GeneralInfoComponent,
     ContactInfoComponent,
     OnlyNumbersDirective,
+    SnackbarComponent,
   ],
   imports: [
     CommonModule,

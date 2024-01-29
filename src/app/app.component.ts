@@ -1,6 +1,11 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { LoginService } from './core/pages/login/login.service';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, filter, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +13,7 @@ import { Subject, takeUntil } from 'rxjs';
   styleUrls: ['./app.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent implements OnInit, OnDestroy{
-
+export class AppComponent implements OnInit, OnDestroy {
   title = 'krugwagen';
 
   destroyed$ = new Subject<void>();
@@ -18,11 +22,13 @@ export class AppComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
     this.loginService.autoLogin();
-    this.loginService.profileType$.pipe(takeUntil(this.destroyed$)).subscribe((profileType) => {
-      if (profileType) {
-        localStorage.setItem('profileType', profileType);
-      }
-    })
+    this.loginService.profileType$
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((profileType) => {
+        if (profileType) {
+          localStorage.setItem('profileType', profileType);
+        }
+      });
     this.loginService.profileType$.next(localStorage.getItem('profileType'));
   }
 

@@ -13,6 +13,11 @@ export interface ProfileInterface {
   companyVAT: string;
   userId: string;
   userType: string;
+  trucks: TruckDTO;
+}
+
+export interface TruckDTO {
+  [key: string]: TruckInterface;
 }
 
 export interface TruckInterface {
@@ -22,4 +27,5 @@ export interface TruckInterface {
   trailerType: string;
   trailerLift: number;
   trailerSize: number;
+  truckDescription: string;
 }

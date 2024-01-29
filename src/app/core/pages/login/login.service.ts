@@ -120,7 +120,7 @@ export class LoginService {
   }
 
   registerNewUser(data: CompanyInfo, userId: string) {
-    return this.http.post(
+    return this.http.put(
       `https://krugwagen-default-rtdb.firebaseio.com/companies/${userId}.json`,
       data,
     );

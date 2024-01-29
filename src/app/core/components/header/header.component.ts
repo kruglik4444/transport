@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit, OnDestroy {
   user$!: BehaviorSubject<User | null>;
 
-  profileType!: string | null;
+  profileType$!: BehaviorSubject<string | null>;
 
   UserTypes = UserTypes;
 
@@ -29,11 +29,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.user$ = this.loginService.user;
-    this.loginService.profileType$.pipe(takeUntil(this.destroyed$))
-    .subscribe((profileType) => {
-      this.profileType = profileType;
-      this.cdr.markForCheck();
-    })
+    this.profileType$ = this.loginService.profileType$;
   }
 
   ngOnDestroy(): void {
@@ -42,11 +38,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   addTruck() {
-    this.router.navigate(['/profile/add-truck'])
+    this.router.navigate(['/profile/add-truck']);
   }
 
   goToProfile() {
-    this.router.navigate(['/profile'])
+    this.router.navigate(['/profile']);
   }
 
   logout() {

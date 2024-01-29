@@ -54,8 +54,7 @@ export class GeneralInfoComponent implements OnInit, OnDestroy{
       companyINN: this.fb.control(null, [Validators.required, Validators.minLength(10), Validators.maxLength(12)]),
       companyKPP: this.fb.control(null, [Validators.required, Validators.minLength(9), Validators.maxLength(9)]),
       companyORGN: this.fb.control(null, [Validators.required, Validators.minLength(13), Validators.maxLength(13)]),
-      companyATI: this.fb.control(null, [Validators.required]),
-
+      companyATI: this.fb.control(null, Validators.required),
     })
   }
 }

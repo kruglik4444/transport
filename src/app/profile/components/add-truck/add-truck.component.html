@@ -52,7 +52,7 @@
             <mat-label>Грузоподъемность, тонн</mat-label>
             <input
               formControlName="trailerLift"
-              type="number"
+              type="text"
               appOnlyNumbers
               matInput
               placeholder="Введи грузоподъемность"
@@ -62,12 +62,12 @@
             </mat-error>
           </mat-form-field>
       </div>
-      <div class="tw-flex tw-gap-x-5">
+      <div class="tw-flex tw-gap-x-5 tw-items-center">
         <mat-form-field class="tw-basis-1/4">
           <mat-label>Объем, м3</mat-label>
           <input
             formControlName="trailerSize"
-            type="number"
+            type="text"
             appOnlyNumbers
             matInput
             placeholder="Введи объем"
@@ -76,11 +76,48 @@
             Введи объем
           </mat-error>
         </mat-form-field>
+
+        <mat-form-field class="tw-basis-2/4">
+          <mat-label>Описание машины</mat-label>
+          <input
+            formControlName="truckDescription"
+            type="text"
+            matInput
+            placeholder="Введи описание"
+          />
+          <mat-error *ngIf="form.controls['truckDescription'].hasError('required')">
+            Введи описание машины
+          </mat-error>
+        </mat-form-field>
+
+        <div class="tw-flex tw-gap-5 tw-basis-1/4">
+          <button
+            color="primary"
+            mat-stroked-button
+            (click)="modelImage.click()"
+          >
+            <span>Фотография машины</span>
+            <input
+              formControlname="modelImage"
+              class="tw-hidden"
+              #modelImage
+              type="file"
+              (change)="onFileSelected($event)"
+            />
+          </button>
+          <mat-icon
+            *ngIf="form.controls['modelImage'].valid"
+            class="tw-text-green-600 tw-mt-1"
+            >check_circle</mat-icon
+          >
+        </div>
+
       </div>
     </mat-card-content>
   </form>
+  <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
 </mat-card>
-<div class="tw-flex tw-justify-end">
+<div class="tw-flex tw-justify-end tw-mt-5">
   <button
       (click)="next()"
       [disabled]="!this.form.valid"

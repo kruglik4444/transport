@@ -20,13 +20,11 @@ export class StorageService {
               user!.id
             }.json`
           )
-          .pipe(
-            map((responseData) => {
-              this.loginService.profileType$.next(Object.values(responseData)[0].userType);
-              return Object.values(responseData)[0];
-            })
-          );
       })
     );
+  }
+
+  addNewTruck(data: TruckInterface, userId: string): Observable<{name : string}> {
+    return this.http.post<{name : string}>(`https://krugwagen-default-rtdb.firebaseio.com/companies/${userId}/trucks.json`, data)
   }
 }

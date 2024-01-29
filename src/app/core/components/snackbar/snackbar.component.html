@@ -1,0 +1,12 @@
+<div class="tw-flex tw-justify-between tw-items-center">
+  <span class="tw-text-sm" matSnackBarLabel> {{ data }} </span>
+  <span matSnackBarActions>
+    <button
+      mat-icon-button
+      matSnackBarAction
+      (click)="snackBarRef.dismissWithAction()"
+    >
+    <mat-icon>close</mat-icon>
+    </button>
+  </span>
+</div>

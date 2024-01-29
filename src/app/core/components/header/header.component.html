@@ -1,12 +1,14 @@
 <mat-toolbar *ngIf="user$ | async as user" color="primary">
   <span>KrugWagen</span>
-  <div *ngIf="profileType === UserTypes.CARRIER" class="tw-flex tw-gap-x-5 tw-ml-5 tw-mt-1">
-    <button mat-flat-button color="primary">Поиск грузов</button>
-    <button (click)="addTruck()" mat-flat-button color="primary">Добавить машину</button>
-  </div>
+  <ng-container *ngIf="profileType$ | async as profileType">
+    <div *ngIf="profileType === UserTypes.CARRIER" class="tw-flex tw-gap-x-5 tw-ml-5 tw-mt-1">
+      <button mat-flat-button color="primary">Поиск грузов</button>
+      <button (click)="addTruck()" mat-flat-button color="primary">Добавить машину</button>
+    </div>
+  </ng-container>
   <span class="example-spacer"></span>
   <button
-    *ngIf="profileType"
+    *ngIf="profileType$ | async"
     (click)="goToProfile()"
     mat-icon-button
   >

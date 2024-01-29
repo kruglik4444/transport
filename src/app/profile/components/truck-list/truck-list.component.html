@@ -1,0 +1,21 @@
+<mat-card *ngIf="trucksArray">
+    <mat-card-header>
+        <mat-card-title>
+            Машины компании
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="tw-flex">
+            <mat-card class="tw-basis-1/4" *ngFor="let truck of trucksArray; trackByIndex">
+                <mat-card-header>
+                    <mat-card-title>
+                        {{truck.model}}
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <img class="tw-max-w-full" src="{{ truck.modelImage }}" alt="">
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </mat-card-content>
+</mat-card>

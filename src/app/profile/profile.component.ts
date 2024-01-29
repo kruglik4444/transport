@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { StorageService } from '../storage/storage.service';
-import { Observable } from 'rxjs';
+import { tap } from 'rxjs';
 import { ProfileInterface } from '../core/interfaces/common.interfaces';
 import { Storage, getDownloadURL, listAll, ref } from '@angular/fire/storage';
 import {
@@ -10,6 +10,7 @@ import {
 } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { LoginService } from '../core/pages/login/login.service';
 
 @Component({
   selector: 'app-profile',
@@ -27,11 +28,17 @@ export class ProfileComponent implements OnInit {
     private storage: Storage,
     private dialog: MatDialog,
     private cdr: ChangeDetectorRef,
+    private loginService: LoginService
   ) {}
 
   ngOnInit(): void {
     this.storageService
       .getProfileData()
+      .pipe(
+        tap((company: ProfileInterface) => {
+          this.loginService.profileType$.next(company.userType);
+        })
+      )
       .subscribe((company: ProfileInterface) => {
         this.company = company;
         this.getImages();

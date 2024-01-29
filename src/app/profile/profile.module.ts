@@ -14,9 +14,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CoreModule } from '../core/core.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { TruckListComponent } from './components/truck-list/truck-list.component';
 
 @NgModule({
-  declarations: [ProfileComponent, AddTruckComponent],
+  declarations: [ProfileComponent, AddTruckComponent, TruckListComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -32,6 +36,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     NgxMaskDirective,
     NgxMaskPipe,
     CoreModule,
+    MatIconModule,
+    MatSnackBarModule,
+    MatProgressBarModule,
   ],
   providers: [provideNgxMask()],
 })
