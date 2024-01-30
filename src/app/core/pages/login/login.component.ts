@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { AuthResponeData, LoginService } from './login.service';
 import { Observable } from 'rxjs';
@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
     private fb: UntypedFormBuilder,
     private loginService: LoginService,
     private router: Router,
+    private cdr: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {
@@ -55,9 +56,11 @@ export class LoginComponent implements OnInit {
         } else {
           this.router.navigate(['/profile'])
         }
-        this.errorMessage = '';
       },
-      error: (error) => this.errorMessage = error, 
+      error: (error) => {
+        this.errorMessage = error;
+        this.cdr.markForCheck();
+      }, 
     })
   }
 }

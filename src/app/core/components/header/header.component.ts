@@ -41,6 +41,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.router.navigate(['/profile/add-truck']);
   }
 
+  addCargo() {
+    this.router.navigate(['/profile/add-cargo']);
+  }
+
+  showCargoList() {
+    this.router.navigate(['/profile/cargo-list']);
+  }
+
   goToProfile() {
     this.router.navigate(['/profile']);
   }

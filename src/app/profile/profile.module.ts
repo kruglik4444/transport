@@ -18,9 +18,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { TruckListComponent } from './components/truck-list/truck-list.component';
+import { AddCargoComponent } from './components/add-cargo/add-cargo.component';
+import { CargoListComponent } from './components/cargo-list/cargo-list.component';
 
 @NgModule({
-  declarations: [ProfileComponent, AddTruckComponent, TruckListComponent],
+  declarations: [ProfileComponent, AddTruckComponent, TruckListComponent, AddCargoComponent, CargoListComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

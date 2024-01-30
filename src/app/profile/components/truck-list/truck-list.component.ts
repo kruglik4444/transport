@@ -9,9 +9,7 @@ import { TruckDTO, TruckInterface } from 'src/app/core/interfaces/common.interfa
 import {
   Storage,
   getDownloadURL,
-  listAll,
   ref,
-  uploadBytes,
 } from '@angular/fire/storage';
 
 @Component({

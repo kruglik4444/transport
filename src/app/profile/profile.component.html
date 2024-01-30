@@ -86,8 +86,8 @@
     </mat-card-content>
   </mat-card>
 
-  <app-truck-list [companyId]="company.userId" [trucks]="company.trucks"></app-truck-list>
-
+  <app-truck-list *ngIf="company.trucks" [companyId]="company.userId" [trucks]="company.trucks"></app-truck-list>
+  
 </div>
 
 <ng-template #loading>

@@ -47,7 +47,7 @@ export class AddTruckComponent implements OnInit, OnDestroy {
     private loginService: LoginService,
     private storageService: StorageService,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -94,8 +94,8 @@ export class AddTruckComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.storageService
       .addNewTruck(this.form.value, this.userId)
+      .pipe(takeUntil(this.destroyed$))
       .subscribe((response) => {
-        console.log(response);
         let imgRef = ref(
           this.storage,
           `companies/${this.userId}/trucks/${response.name}`,
@@ -106,7 +106,7 @@ export class AddTruckComponent implements OnInit, OnDestroy {
             this.router.navigate(['/profile']);
             this.snackBar.openFromComponent(SnackbarComponent, {
               duration: 5000,
-              data: 'Машина успешно добавлена'
+              data: 'Машина успешно добавлена',
             });
           })
           .catch((error) => console.log(error));

@@ -1,0 +1,49 @@
+<mat-card>
+  <form [formGroup]="form">
+    <mat-card-header>
+      <mat-card-title> Добавить груз </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="tw-flex tw-gap-x-5">
+        <mat-form-field class="tw-basis-1/4">
+          <mat-label>Наименование груза</mat-label>
+          <input
+            formControlName="name"
+            type="text"
+            matInput
+            placeholder="Введи наименование груза"
+          />
+          <mat-error *ngIf="form.controls['name'].hasError('required')">
+            Введи наименование груза
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="tw-basis-1/4">
+          <mat-label>Вес груза, т</mat-label>
+          <input
+            formControlName="weight"
+            type="text"
+            matInput
+            placeholder="Введи вес груза"
+          />
+          <mat-error *ngIf="form.controls['weight'].hasError('required')">
+            Введи вес груза
+          </mat-error>
+        </mat-form-field>
+        
+        <mat-form-field class="tw-basis-1/4">
+          <mat-label>Объем груза, м3</mat-label>
+          <input
+            formControlName="size"
+            type="text"
+            matInput
+            placeholder="Введи объем груза"
+          />
+          <mat-error *ngIf="form.controls['name'].hasError('required')">
+            Введи объем груза
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+  </form>
+</mat-card>

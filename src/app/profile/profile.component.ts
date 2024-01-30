@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { StorageService } from '../storage/storage.service';
-import { tap } from 'rxjs';
+import { Subject, takeUntil, tap } from 'rxjs';
 import { ProfileInterface } from '../core/interfaces/common.interfaces';
 import { Storage, getDownloadURL, listAll, ref } from '@angular/fire/storage';
 import {
@@ -18,10 +18,12 @@ import { LoginService } from '../core/pages/login/login.service';
   styleUrls: ['./profile.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
   company!: ProfileInterface;
 
   documentURLs: string[] = [];
+
+  destroyed$ = new Subject<void>();
 
   constructor(
     private storageService: StorageService,
@@ -35,6 +37,7 @@ export class ProfileComponent implements OnInit {
     this.storageService
       .getProfileData()
       .pipe(
+        takeUntil(this.destroyed$),
         tap((company: ProfileInterface) => {
           this.loginService.profileType$.next(company.userType);
         })
@@ -43,6 +46,11 @@ export class ProfileComponent implements OnInit {
         this.company = company;
         this.getImages();
       });
+  }
+
+  ngOnDestroy(): void {
+    this.destroyed$.next();
+    this.destroyed$.complete();
   }
 
   getImages() {
