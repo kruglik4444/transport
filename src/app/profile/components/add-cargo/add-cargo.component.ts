@@ -5,6 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 import {
+  FormArray,
   UntypedFormBuilder,
   UntypedFormGroup,
   Validators,
@@ -25,6 +26,10 @@ export class AddCargoComponent implements OnInit, OnDestroy {
 
   trailerTypes = Object.values(TrailerTypes);
 
+  get unloading() {
+    return this.form.controls['unloading'] as FormArray;
+  }
+
   destroyed$ = new Subject<void>();
 
   constructor(
@@ -35,6 +40,8 @@ export class AddCargoComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initForm();
+    this.addUnloading();
+    console.log(this.unloading.controls[0]);
   }
 
   ngOnDestroy(): void {
@@ -48,10 +55,27 @@ export class AddCargoComponent implements OnInit, OnDestroy {
       trailerType: this.fb.control(null, Validators.required),
       weight: this.fb.control(null, Validators.required),
       size: this.fb.control(null, Validators.required),
-      fromAddress: this.fb.control(null, Validators.required),
-      toAddress: this.fb.control(null, Validators.required),
       bet: this.fb.control(null, Validators.required),
+      date: this.fb.control(null, Validators.required),
+      description: this.fb.control(null, Validators.required),
+      logistName: this.fb.control(null, Validators.required),
+      logistPhone: this.fb.control(null, Validators.required),
+      uploadingCity: this.fb.control(null, Validators.required),
+      uploadingAddress: this.fb.control(null, Validators.required),
+      unloading: this.fb.array([]),
     });
+  }
+
+  addUnloading() {
+    const unloadingForm = this.fb.group({
+      unloadingCity: this.fb.control(null, Validators.required),
+      unloadingAddress: this.fb.control(null, Validators.required),
+    });
+    this.unloading.push(unloadingForm);
+  }
+
+  deleteUnloading(index: number) {
+    this.unloading.removeAt(index);
   }
 
   next() {

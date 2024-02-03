@@ -30,7 +30,7 @@
             Введи вес груза
           </mat-error>
         </mat-form-field>
-        
+
         <mat-form-field class="tw-basis-1/4">
           <mat-label>Объем груза, м3</mat-label>
           <input
@@ -43,7 +43,125 @@
             Введи объем груза
           </mat-error>
         </mat-form-field>
+
+        <mat-form-field class="tw-basis-1/4">
+          <mat-label>Тип кузова</mat-label>
+          <mat-select formControlName="trailerType">
+            <mat-option
+              [value]="type"
+              *ngFor="let type of trailerTypes; trackByIndex"
+            >
+              {{ type }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.controls['trailerType'].hasError('required')">
+            Выбери тип кузова
+          </mat-error>
+        </mat-form-field>
       </div>
+      <div class="tw-flex tw-gap-x-5">
+        <mat-form-field class="tw-basis-1/4">
+          <mat-label>Город загрузки</mat-label>
+          <input
+            formControlName="uploadingCity"
+            type="text"
+            matInput
+            placeholder="Населенный пункт"
+          />
+          <mat-error
+            *ngIf="form.controls['uploadingCity'].hasError('required')"
+          >
+            Введи город загрузки
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="tw-basis-1/4">
+          <mat-label>Адрес загрузки</mat-label>
+          <input
+            formControlName="uploadingAddress"
+            type="text"
+            matInput
+            placeholder="Адрес"
+          />
+          <mat-error
+            *ngIf="form.controls['uploadingAddress'].hasError('required')"
+          >
+            Введи адрес загрузки
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="tw-basis-1/4">
+          <mat-label>Когда</mat-label>
+          <input formControlName="date" matInput [matDatepicker]="picker" />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="form.controls['date'].hasError('required')">
+            Введи дату
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="tw-basis-1/4">
+          <mat-label>Стоимость, руб</mat-label>
+          <input
+            formControlName="bet"
+            type="text"
+            appOnlyNumbers
+            matInput
+            placeholder="Стоимость"
+          />
+          <mat-error *ngIf="form.controls['bet'].hasError('required')">
+            Введи стоимость рейса
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="tw-flex tw-gap-x-5 tw-items-center tw-pt-5 tw-pb-4">
+        <div class="tw-text-xl tw-font-medium">Разгрузка</div>
+      </div>
+
+      <ng-container formArrayName="unloading">
+        <ng-container
+          *ngFor="let unloadingForm of unloading.controls; index as i"
+          [formGroupName]="i"
+        >
+          <div class="tw-flex tw-flex-col">
+            <div class="tw-flex tw-items-center tw-gap-x-5">
+              <mat-form-field class="tw-basis-1/4">
+                <mat-label>Город разгрузки</mat-label>
+                <input
+                  formControlName="unloadingCity"
+                  type="text"
+                  matInput
+                  placeholder="Населенный пункт"
+                />
+              </mat-form-field>
+              <mat-form-field class="tw-basis-1/4">
+                <mat-label>Адрес разгрузки</mat-label>
+                <input
+                  formControlName="unloadingAddress"
+                  type="text"
+                  matInput
+                  placeholder="Адрес"
+                />
+              </mat-form-field>
+              <button
+                [disabled]="unloading.length === 1"
+                (click)="deleteUnloading(i)"
+                mat-icon-button
+                color="warn"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+      <button (click)="addUnloading()" color="primary" mat-raised-button>
+        Добавить разгрузку
+      </button>
     </mat-card-content>
   </form>
 </mat-card>

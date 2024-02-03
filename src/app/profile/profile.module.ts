@@ -20,9 +20,17 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { TruckListComponent } from './components/truck-list/truck-list.component';
 import { AddCargoComponent } from './components/add-cargo/add-cargo.component';
 import { CargoListComponent } from './components/cargo-list/cargo-list.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
-  declarations: [ProfileComponent, AddTruckComponent, TruckListComponent, AddCargoComponent, CargoListComponent],
+  declarations: [
+    ProfileComponent,
+    AddTruckComponent,
+    TruckListComponent,
+    AddCargoComponent,
+    CargoListComponent,
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -41,7 +49,12 @@ import { CargoListComponent } from './components/cargo-list/cargo-list.component
     MatIconModule,
     MatSnackBarModule,
     MatProgressBarModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
-  providers: [provideNgxMask()],
+  providers: [
+    provideNgxMask(),
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
+  ],
 })
 export class ProfileModule {}
