@@ -1,3 +1,5 @@
+import { CargoStatus } from "../enums/cargo-types.enum";
+
 export interface ProfileInterface {
   companyATI: string;
   companyCity: string;
@@ -28,4 +30,27 @@ export interface TruckInterface {
   trailerLift: number;
   trailerSize: number;
   truckDescription: string;
+}
+
+
+export interface CargoInterface {
+  name: string;
+  trailerType: string;
+  weight: number;
+  size: number;
+  bet: number;
+  date: Date;
+  description: string;
+  logistName: string;
+  logistPhone: string;
+  uploadingCity: string;
+  uploadingAddress: string;
+  unloading: Unloading[];
+  shipperId: string;
+  status: CargoStatus;  
+}
+
+export interface Unloading {
+  unloadingAddress: string;
+  unloadingCity: string;
 }

@@ -22,7 +22,8 @@
           <mat-label>Вес груза, т</mat-label>
           <input
             formControlName="weight"
-            type="text"
+            appOnlyNumbers
+            type="number"
             matInput
             placeholder="Введи вес груза"
           />
@@ -35,7 +36,8 @@
           <mat-label>Объем груза, м3</mat-label>
           <input
             formControlName="size"
-            type="text"
+            appOnlyNumbers
+            type="number"
             matInput
             placeholder="Введи объем груза"
           />
@@ -107,13 +109,56 @@
           <mat-label>Стоимость, руб</mat-label>
           <input
             formControlName="bet"
-            type="text"
             appOnlyNumbers
+            type="number"
             matInput
             placeholder="Стоимость"
           />
           <mat-error *ngIf="form.controls['bet'].hasError('required')">
             Введи стоимость рейса
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="tw-flex tw-gap-x-5">
+        <mat-form-field class="tw-basis-1/2">
+          <mat-label>Примечания к рейсу</mat-label>
+          <input
+            formControlName="description"
+            type="text"
+            matInput
+            placeholder="Примечания к рейсу"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="tw-basis-1/4">
+          <mat-label>ФИО логиста</mat-label>
+          <input
+            formControlName="logistName"
+            type="text"
+            matInput
+            placeholder="Введи ФИО"
+          />
+          <mat-error
+            *ngIf="form.controls['logistName'].hasError('required')"
+          >
+            Введи ФИО
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="tw-basis-1/4">
+          <mat-label>Телефон логиста</mat-label>
+          <input
+            formControlName="logistPhone"
+            mask='+0(000)-000-00-00'
+            type="text"
+            matInput
+            placeholder="Введи телефон"
+          />
+          <mat-error
+            *ngIf="form.controls['logistName'].hasError('required')"
+          >
+            Введи телефон
           </mat-error>
         </mat-form-field>
       </div>
@@ -159,9 +204,20 @@
           </div>
         </ng-container>
       </ng-container>
-      <button (click)="addUnloading()" color="primary" mat-raised-button>
+      <button (click)="addUnloading()" color="primary" mat-stroked-button>
         Добавить разгрузку
       </button>
     </mat-card-content>
   </form>
 </mat-card>
+
+<div class="tw-flex tw-justify-end tw-mt-5">
+  <button
+    (click)="next()"
+    [disabled]="!this.form.valid"
+    mat-raised-button
+    color="primary"
+  >
+    Продолжить
+  </button>
+</div>

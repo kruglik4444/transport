@@ -11,6 +11,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Subject, exhaustMap, takeUntil } from 'rxjs';
+import { CargoStatus } from 'src/app/core/enums/cargo-types.enum';
 import { TrailerTypes } from 'src/app/core/enums/truck-types.enum';
 import { LoginService } from 'src/app/core/pages/login/login.service';
 import { StorageService } from 'src/app/storage/storage.service';
@@ -41,7 +42,6 @@ export class AddCargoComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initForm();
     this.addUnloading();
-    console.log(this.unloading.controls[0]);
   }
 
   ngOnDestroy(): void {
@@ -57,7 +57,7 @@ export class AddCargoComponent implements OnInit, OnDestroy {
       size: this.fb.control(null, Validators.required),
       bet: this.fb.control(null, Validators.required),
       date: this.fb.control(null, Validators.required),
-      description: this.fb.control(null, Validators.required),
+      description: this.fb.control(null),
       logistName: this.fb.control(null, Validators.required),
       logistPhone: this.fb.control(null, Validators.required),
       uploadingCity: this.fb.control(null, Validators.required),
@@ -86,6 +86,7 @@ export class AddCargoComponent implements OnInit, OnDestroy {
           return this.storageService.addNewCargo({
             ...this.form.value,
             shipperId: user!.id,
+            status: CargoStatus.CREATED,
           });
         }),
       )

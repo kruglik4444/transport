@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, exhaustMap, map, take } from 'rxjs';
 import { LoginService } from '../core/pages/login/login.service';
 import {
+  CargoInterface,
   ProfileInterface,
   TruckInterface,
 } from '../core/interfaces/common.interfaces';
@@ -39,10 +40,26 @@ export class StorageService {
     );
   }
 
-  addNewCargo(data: any): Observable<{ name: string }> {
+  addNewCargo(data: CargoInterface): Observable<{ name: string }> {
     return this.http.post<{ name: string }>(
       `https://krugwagen-default-rtdb.firebaseio.com/cargo-list.json`,
       data,
     );
+  }
+
+  getCargoList(): Observable<CargoInterface[]> {
+    return this.http
+      .get<Record<string, CargoInterface>>(`https://krugwagen-default-rtdb.firebaseio.com/cargo-list.json`)
+      .pipe(
+        map((responseData) => {
+          const array = [];
+          for (const key in responseData) {
+            if (responseData.hasOwnProperty(key)) {
+              array.push({ ...responseData[key], cargoId: key });
+            }
+          }
+          return array;
+        }),
+      );
   }
 }
