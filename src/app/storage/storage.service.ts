@@ -47,9 +47,29 @@ export class StorageService {
     );
   }
 
+  changeCargoStatus(id: string, data: any) {
+    return this.http.patch(`https://krugwagen-default-rtdb.firebaseio.com/cargo-list/${id}.json`, data);
+  }
+
+  getCompanyCargo(companyId: string): Observable<CargoInterface[]> {
+    return this.http
+      .get<Record<string, CargoInterface>>(`https://krugwagen-default-rtdb.firebaseio.com/cargo-list.json?orderBy="shipperId"&equalTo="${companyId}"`)
+      .pipe(
+        map((responseData) => {
+          const array = [];
+          for (const key in responseData) {
+            if (responseData.hasOwnProperty(key)) {
+              array.push({ ...responseData[key], cargoId: key });
+            }
+          }
+          return array;
+        }),
+      );
+  }
+
   getCargoList(): Observable<CargoInterface[]> {
     return this.http
-      .get<Record<string, CargoInterface>>(`https://krugwagen-default-rtdb.firebaseio.com/cargo-list.json`)
+      .get<Record<string, CargoInterface>>(`https://krugwagen-default-rtdb.firebaseio.com/cargo-list.json?orderBy="status"&equalTo="Создан"`)
       .pipe(
         map((responseData) => {
           const array = [];

@@ -10,7 +10,7 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
-import { Subject, exhaustMap, takeUntil } from 'rxjs';
+import { Subject, switchMap, takeUntil } from 'rxjs';
 import { CargoStatus } from 'src/app/core/enums/cargo-types.enum';
 import { TrailerTypes } from 'src/app/core/enums/truck-types.enum';
 import { LoginService } from 'src/app/core/pages/login/login.service';
@@ -82,7 +82,7 @@ export class AddCargoComponent implements OnInit, OnDestroy {
     this.loginService.user
       .pipe(
         takeUntil(this.destroyed$),
-        exhaustMap((user) => {
+        switchMap((user) => {
           return this.storageService.addNewCargo({
             ...this.form.value,
             shipperId: user!.id,

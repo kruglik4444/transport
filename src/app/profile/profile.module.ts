@@ -22,6 +22,9 @@ import { AddCargoComponent } from './components/add-cargo/add-cargo.component';
 import { CargoListComponent } from './components/cargo-list/cargo-list.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
+import { MatTableModule } from '@angular/material/table';
+import { FindCargoComponent } from './components/find-cargo/find-cargo.component';
+
 
 @NgModule({
   declarations: [
@@ -30,6 +33,7 @@ import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
     TruckListComponent,
     AddCargoComponent,
     CargoListComponent,
+    FindCargoComponent,
   ],
   imports: [
     CommonModule,
@@ -51,6 +55,7 @@ import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
     MatProgressBarModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatTableModule,
   ],
   providers: [
     provideNgxMask(),
