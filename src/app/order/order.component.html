@@ -1,0 +1,6 @@
+<ng-container *ngIf="cargo$ | async as cargo">
+    <ng-container *ngIf="profileType$ | async as profileType">
+        <app-carrier-cargo [cargo]="cargo" *ngIf="profileType === UserTypes.CARRIER"></app-carrier-cargo>
+        <app-shipper-cargo [cargo]="cargo" *ngIf="profileType === UserTypes.PRODUCER"></app-shipper-cargo>
+      </ng-container>
+</ng-container>

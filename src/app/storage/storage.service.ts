@@ -48,12 +48,17 @@ export class StorageService {
   }
 
   changeCargoStatus(id: string, data: any) {
-    return this.http.patch(`https://krugwagen-default-rtdb.firebaseio.com/cargo-list/${id}.json`, data);
+    return this.http.patch(
+      `https://krugwagen-default-rtdb.firebaseio.com/cargo-list/${id}.json`,
+      data,
+    );
   }
 
   getCompanyCargo(companyId: string): Observable<CargoInterface[]> {
     return this.http
-      .get<Record<string, CargoInterface>>(`https://krugwagen-default-rtdb.firebaseio.com/cargo-list.json?orderBy="shipperId"&equalTo="${companyId}"`)
+      .get<Record<string, CargoInterface>>(
+        `https://krugwagen-default-rtdb.firebaseio.com/cargo-list.json?orderBy="shipperId"&equalTo="${companyId}"`,
+      )
       .pipe(
         map((responseData) => {
           const array = [];
@@ -69,7 +74,9 @@ export class StorageService {
 
   getCargoList(): Observable<CargoInterface[]> {
     return this.http
-      .get<Record<string, CargoInterface>>(`https://krugwagen-default-rtdb.firebaseio.com/cargo-list.json?orderBy="status"&equalTo="Создан"`)
+      .get<Record<string, CargoInterface>>(
+        `https://krugwagen-default-rtdb.firebaseio.com/cargo-list.json?orderBy="status"&equalTo="Создан"`,
+      )
       .pipe(
         map((responseData) => {
           const array = [];
@@ -81,5 +88,12 @@ export class StorageService {
           return array;
         }),
       );
+  }
+
+  getCargoById(id: string): Observable<CargoInterface> {
+    return this.http
+      .get<CargoInterface>(
+        `https://krugwagen-default-rtdb.firebaseio.com/cargo-list/${id}.json`,
+      )
   }
 }

@@ -23,6 +23,11 @@ const routes: Routes = [
     path: 'profile',
     loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule),
     canActivate: [authGuard],
+  },
+  {
+    path: 'order',
+    loadChildren: () => import('./order/order.module').then(m => m.OrderModule),
+    canActivate: [authGuard],
   }
 ];
 

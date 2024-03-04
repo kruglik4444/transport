@@ -35,6 +35,7 @@ export interface TruckInterface {
 
 export interface CargoInterface {
   name: string;
+  cargoId: string;
   trailerType: string;
   weight: number;
   size: number;

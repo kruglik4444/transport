@@ -5,7 +5,9 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
+import { CargoStatus } from 'src/app/core/enums/cargo-types.enum';
 import { CargoInterface } from 'src/app/core/interfaces/common.interfaces';
 import { StorageService } from 'src/app/storage/storage.service';
 
@@ -18,7 +20,7 @@ import { StorageService } from 'src/app/storage/storage.service';
 export class FindCargoComponent implements OnInit, OnDestroy {
   dataSource!: CargoInterface[];
 
-  destroyed = new Subject<void>();
+  destroyed$ = new Subject<void>();
 
   columnsToDisplay: string[] = [
     'Откуда',
@@ -34,6 +36,7 @@ export class FindCargoComponent implements OnInit, OnDestroy {
   constructor(
     private storageService: StorageService,
     private cdr: ChangeDetectorRef,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -41,24 +44,24 @@ export class FindCargoComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.destroyed.next();
-    this.destroyed.complete();
+    this.destroyed$.next();
+    this.destroyed$.complete();
   }
 
   uploadData() {
     this.storageService
       .getCargoList()
-      .pipe(takeUntil(this.destroyed))
+      .pipe(takeUntil(this.destroyed$))
       .subscribe((cargoList: CargoInterface[]) => {
         this.dataSource = cargoList;
         this.cdr.markForCheck();
       });
   }
-
+  
   selectCargo(id: string) {
-    let status = { status: 'Взят в работу' };
-    this.storageService.changeCargoStatus(id, status).subscribe(() => {
-      
+    let status = { status: CargoStatus.ON_APPROVAL };
+    this.storageService.changeCargoStatus(id, status).pipe(takeUntil(this.destroyed$)).subscribe(() => {
+      this.router.navigate(['/order', id]);
     })
   }
 }
