@@ -18,6 +18,7 @@ import { ContactInfoComponent } from './pages/edit-profile/components/contact-in
 import { OnlyNumbersDirective } from './directives/only-numbers.directive';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { SnackbarComponent } from './components/snackbar/snackbar.component';
     MatSelectModule,
     NgxMaskDirective,
     NgxMaskPipe,
+    MatMenuModule,
   ],
   exports: [
     HeaderComponent,

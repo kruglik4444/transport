@@ -3,7 +3,12 @@
   <ng-container *ngIf="profileType$ | async as profileType">
     <div *ngIf="profileType === UserTypes.CARRIER" class="tw-flex tw-gap-x-5 tw-ml-5 tw-mt-1">
       <button (click)="findCargo()" mat-flat-button color="primary">Поиск грузов</button>
-      <button (click)="addTruck()" mat-flat-button color="primary">Добавить машину</button>
+      <button  mat-flat-button color="primary">Рейсы</button>
+      <button mat-button [matMenuTriggerFor]="menu">Транспорт</button>
+      <mat-menu #menu="matMenu">
+        <button (click)="addTruck()" mat-menu-item>Добавить транспорт</button>
+        <button mat-menu-item>Автопарк</button>
+      </mat-menu>
     </div>
     <div *ngIf="profileType === UserTypes.PRODUCER" class="tw-flex tw-gap-x-5 tw-ml-5 tw-mt-1">
       <button (click)="showCargoList()" mat-flat-button color="primary">Ваши грузы</button>
