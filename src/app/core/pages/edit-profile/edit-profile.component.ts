@@ -140,7 +140,7 @@ export class EditProfileComponent implements OnInit, OnDestroy {
     this.loginService
       .registerNewUser(companyData, this.userId!)
       .subscribe(() => {
-        this.router.navigate(['/profile']);
+        this.router.navigate(['/profile', this.userId]);
       });
   }
 }

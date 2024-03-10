@@ -50,11 +50,11 @@ export class LoginComponent implements OnInit {
     }
 
     loginObs.subscribe({
-      next: () => {
+      next: (userData) => {
         if(mode === 'signUp') {
           this.router.navigate(['/edit-profile'])
         } else {
-          this.router.navigate(['/profile'])
+          this.router.navigate(['/profile', userData.localId])
         }
       },
       error: (error) => {

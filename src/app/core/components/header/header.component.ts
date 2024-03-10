@@ -44,8 +44,8 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/profile/cargo-list']);
   }
 
-  goToProfile() {
-    this.router.navigate(['/profile']);
+  goToProfile(id: string) {
+    this.router.navigate(['/profile', id]);
   }
 
   logout() {

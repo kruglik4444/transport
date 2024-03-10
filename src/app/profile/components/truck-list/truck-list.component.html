@@ -1,7 +1,12 @@
 <mat-card *ngIf="trucksArray">
     <mat-card-header>
         <mat-card-title>
-            Машины компании
+            <div class="tw-flex tw-items-center">
+                Машины компании
+            <button (click)="addNewTruck()" color="primary" mat-icon-button>
+                <mat-icon>add</mat-icon>
+            </button>
+            </div>
         </mat-card-title>
     </mat-card-header>
     <mat-card-content>

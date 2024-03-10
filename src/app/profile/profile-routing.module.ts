@@ -9,10 +9,6 @@ import { FindCargoComponent } from "./components/find-cargo/find-cargo.component
 
 const routes: Routes = [
     {
-        path: '',
-        component: ProfileComponent
-    },
-    {
         path: 'add-truck',
         component: AddTruckComponent
     },
@@ -27,7 +23,11 @@ const routes: Routes = [
     {
         path: 'find-cargo',
         component: FindCargoComponent
-    }
+    },
+    {
+        path: ':id',
+        component: ProfileComponent
+    },
 ];
 
 @NgModule({

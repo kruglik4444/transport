@@ -11,6 +11,7 @@ import {
   getDownloadURL,
   ref,
 } from '@angular/fire/storage';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-truck-list',
@@ -25,7 +26,7 @@ export class TruckListComponent implements OnInit {
 
   trucksArray!: TruckInterface[];
 
-  constructor(private storage: Storage, private cdr: ChangeDetectorRef) {}
+  constructor(private storage: Storage, private cdr: ChangeDetectorRef, private router: Router) {}
 
   ngOnInit(): void {
     Promise.all(
@@ -47,4 +48,9 @@ export class TruckListComponent implements OnInit {
     );
     return getDownloadURL(imageRef);
   }
+
+  addNewTruck() {
+    this.router.navigate(['/profile/add-truck'])
+  }
+
 }
