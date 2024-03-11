@@ -11,6 +11,7 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { LoginService } from '../core/pages/login/login.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -25,21 +26,32 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   destroyed$ = new Subject<void>();
 
+  isProfileOwner = false;
+
   constructor(
     private storageService: StorageService,
     private storage: Storage,
     private dialog: MatDialog,
     private cdr: ChangeDetectorRef,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
+    let userId = this.route.snapshot.paramMap.get('id');
+    this.loginService.user.subscribe((currentUser) => {
+      if (currentUser?.id === userId) {
+        this.isProfileOwner = true;
+      }
+    })
     this.storageService
-      .getProfileData()
+      .getProfileData(userId!)
       .pipe(
         takeUntil(this.destroyed$),
         tap((company: ProfileInterface) => {
-          this.loginService.profileType$.next(company.userType);
+          if (this.isProfileOwner) {
+            this.loginService.profileType$.next(company.userType);
+          }
         })
       )
       .subscribe((company: ProfileInterface) => {

@@ -57,6 +57,9 @@ import { FindCargoComponent } from './components/find-cargo/find-cargo.component
     MatNativeDateModule,
     MatTableModule,
   ],
+  exports: [
+    ProfileComponent,
+  ],
   providers: [
     provideNgxMask(),
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },

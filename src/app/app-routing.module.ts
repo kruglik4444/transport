@@ -3,6 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './core/pages/login/login.component';
 import { EditProfileComponent } from './core/pages/edit-profile/edit-profile.component';
 import { authGuard } from './guards/auth.guard';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,11 @@ const routes: Routes = [
   {
     path: 'edit-profile',
     component: EditProfileComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'company/:id',
+    component: ProfileComponent,
     canActivate: [authGuard],
   },
   {

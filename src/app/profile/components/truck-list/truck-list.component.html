@@ -3,7 +3,7 @@
         <mat-card-title>
             <div class="tw-flex tw-items-center">
                 Машины компании
-            <button (click)="addNewTruck()" color="primary" mat-icon-button>
+            <button *ngIf="isProfileOwner" (click)="addNewTruck()" color="primary" mat-icon-button>
                 <mat-icon>add</mat-icon>
             </button>
             </div>

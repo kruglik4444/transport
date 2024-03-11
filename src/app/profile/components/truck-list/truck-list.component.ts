@@ -24,6 +24,8 @@ export class TruckListComponent implements OnInit {
 
   @Input() companyId!: string;
 
+  @Input() isProfileOwner!: boolean;
+
   trucksArray!: TruckInterface[];
 
   constructor(private storage: Storage, private cdr: ChangeDetectorRef, private router: Router) {}

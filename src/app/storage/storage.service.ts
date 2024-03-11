@@ -17,16 +17,9 @@ export class StorageService {
     private loginService: LoginService,
   ) {}
 
-  getProfileData(): Observable<ProfileInterface> {
-    return this.loginService.user.pipe(
-      take(1),
-      exhaustMap((user) => {
-        return this.http.get<ProfileInterface>(
-          `https://krugwagen-default-rtdb.firebaseio.com/companies/${
-            user!.id
-          }.json`,
-        );
-      }),
+  getProfileData(userId: string): Observable<ProfileInterface> {
+    return this.http.get<ProfileInterface>(
+      `https://krugwagen-default-rtdb.firebaseio.com/companies/${userId}.json`,
     );
   }
 
@@ -91,9 +84,8 @@ export class StorageService {
   }
 
   getCargoById(id: string): Observable<CargoInterface> {
-    return this.http
-      .get<CargoInterface>(
-        `https://krugwagen-default-rtdb.firebaseio.com/cargo-list/${id}.json`,
-      )
+    return this.http.get<CargoInterface>(
+      `https://krugwagen-default-rtdb.firebaseio.com/cargo-list/${id}.json`,
+    );
   }
 }
