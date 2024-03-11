@@ -1,0 +1,27 @@
+<div class="tw-flex tw-flex-col tw-gap-y-5 tw-pb-5">
+  <mat-card>
+    <form [formGroup]="form">
+      <mat-card-header>
+        <mat-card-title> Введите данные автомобиля </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="tw-flex tw-gap-x-5">
+            <mat-form-field class="tw-basis-1/4">
+                <mat-label>Тип машины</mat-label>
+                <mat-select formControlName="truckType">
+                  <mat-option
+                    [value]="type"
+                    *ngFor="let type of truckTypes; trackByIndex"
+                  >
+                    {{ type }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.controls['truckType'].hasError('required')">
+                  Выбери тип машины
+                </mat-error>
+              </mat-form-field>
+        </div>
+      </mat-card-content>
+    </form>
+  </mat-card>
+</div>

@@ -28,10 +28,6 @@ export class HeaderComponent implements OnInit {
     this.profileType$ = this.loginService.profileType$;
   }
 
-  addTruck() {
-    this.router.navigate(['/profile/add-truck']);
-  }
-
   addCargo() {
     this.router.navigate(['/profile/add-cargo']);
   }
@@ -41,7 +37,15 @@ export class HeaderComponent implements OnInit {
   }
 
   showCargoList() {
-    this.router.navigate(['/profile/cargo-list']);
+    this.router.navigate(['/order']);
+  }
+
+  addTransport() {
+    this.router.navigate(['/transport/add-new']);
+  }
+
+  showTransportList() {
+    this.router.navigate(['/transport/list']);
   }
 
   goToProfile(id: string) {

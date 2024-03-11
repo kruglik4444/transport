@@ -5,7 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { LoginService } from './core/pages/login/login.service';
-import { Subject, filter, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-root',
