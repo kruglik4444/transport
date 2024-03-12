@@ -10,15 +10,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
-
-
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 @NgModule({
   declarations: [
     TransportComponent,
     TransportListComponent,
     TransportItemComponent,
-    AddTransportComponent
+    AddTransportComponent,
   ],
   imports: [
     CommonModule,
@@ -28,6 +27,9 @@ import { MatCardModule } from '@angular/material/card';
     MatInputModule,
     MatSelectModule,
     MatCardModule,
-  ]
+    NgxMaskDirective,
+    NgxMaskPipe,
+  ],
+  providers: [provideNgxMask()],
 })
-export class TransportModule { }
+export class TransportModule {}

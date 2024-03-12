@@ -6,20 +6,127 @@
       </mat-card-header>
       <mat-card-content>
         <div class="tw-flex tw-gap-x-5">
-            <mat-form-field class="tw-basis-1/4">
-                <mat-label>Тип машины</mat-label>
-                <mat-select formControlName="truckType">
-                  <mat-option
-                    [value]="type"
-                    *ngFor="let type of truckTypes; trackByIndex"
-                  >
-                    {{ type }}
-                  </mat-option>
-                </mat-select>
-                <mat-error *ngIf="form.controls['truckType'].hasError('required')">
-                  Выбери тип машины
-                </mat-error>
-              </mat-form-field>
+
+          <mat-form-field class="tw-basis-2/5">
+            <mat-label>ФИО водителя</mat-label>
+            <input
+              formControlName="driverName"
+              type="text"
+              matInput
+              placeholder="Введи ФИО водителя"
+            />
+            <mat-error *ngIf="form.controls['driverName'].hasError('required')">
+              Введи ФИО водителя
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="tw-basis-1/5">
+            <mat-label>Модель машины</mat-label>
+            <input
+              formControlName="truckName"
+              type="text"
+              matInput
+              placeholder="Введи модель машины"
+            />
+            <mat-error *ngIf="form.controls['truckName'].hasError('required')">
+              Введи модель машины
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="tw-basis-1/5">
+            <mat-label>Тип машины</mat-label>
+            <mat-select formControlName="truckType">
+              <mat-option
+                [value]="type"
+                *ngFor="let type of truckTypes; trackByIndex"
+              >
+                {{ type }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.controls['truckType'].hasError('required')">
+              Выбери тип машины
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="tw-basis-1/5">
+            <mat-label>Госномер машины</mat-label>
+            <input
+              formControlName="truckNumber"
+              type="text"
+              mask='R NNN RR NN'
+              [patterns]="customPatterns"
+              matInput
+              placeholder="Введи госномер машины"
+            />
+            <mat-error *ngIf="form.controls['truckNumber'].hasError('required')">
+              Введи госномер машины
+            </mat-error>
+          </mat-form-field>
+
+        </div>
+        <div *ngIf="form.contains('trailerNumber')" class="tw-flex tw-gap-x-5">
+
+          <mat-form-field class="tw-basis-1/5">
+            <mat-label>Госномер прицепа</mat-label>
+            <input
+              formControlName="trailerNumber"
+              type="text"
+              mask='RR NNNN NN'
+              [patterns]="customPatterns"
+              matInput
+              placeholder="Введи госномер прицепа"
+            />
+            <mat-error *ngIf="form.controls['trailerNumber'].hasError('required')">
+              Введи госномер прицепа
+            </mat-error>
+          </mat-form-field>
+
+        </div>
+        <div class="tw-flex tw-gap-x-5">
+
+          <mat-form-field class="tw-basis-1/4">
+            <mat-label>Тип кузова</mat-label>
+            <mat-select formControlName="trailerType">
+              <mat-option
+                [value]="type"
+                *ngFor="let type of trailerTypes; trackByIndex"
+              >
+                {{ type }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.controls['trailerType'].hasError('required')">
+              Выбери тип кузова
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="tw-basis-1/4">
+            <mat-label>Грузоподъемность, тонн</mat-label>
+            <input
+              formControlName="trailerLift"
+              type="text"
+              appOnlyNumbers
+              matInput
+              placeholder="Введи грузоподъемность"
+            />
+            <mat-error *ngIf="form.controls['trailerLift'].hasError('required')">
+              Введи грузоподъемность
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="tw-basis-1/4">
+            <mat-label>Объем, м3</mat-label>
+            <input
+              formControlName="trailerSize"
+              type="text"
+              appOnlyNumbers
+              matInput
+              placeholder="Введи объем"
+            />
+            <mat-error *ngIf="form.controls['trailerSize'].hasError('required')">
+              Введи объем
+            </mat-error>
+          </mat-form-field>
+          
         </div>
       </mat-card-content>
     </form>
