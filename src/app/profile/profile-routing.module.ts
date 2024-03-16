@@ -3,7 +3,6 @@ import { RouterModule, Routes } from "@angular/router";
 import { ProfileComponent } from "./profile.component";
 import { AddTruckComponent } from "./components/add-truck/add-truck.component";
 import { AddCargoComponent } from "./components/add-cargo/add-cargo.component";
-import { CargoListComponent } from "./components/cargo-list/cargo-list.component";
 import { FindCargoComponent } from "./components/find-cargo/find-cargo.component";
 
 
@@ -15,10 +14,6 @@ const routes: Routes = [
     {
         path: 'add-cargo',
         component: AddCargoComponent
-    },
-    {
-        path: 'cargo-list',
-        component: CargoListComponent
     },
     {
         path: 'find-cargo',

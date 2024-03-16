@@ -9,8 +9,14 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
-import { Subject, takeUntil } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { Subject, switchMap, takeUntil } from 'rxjs';
+import { SnackbarComponent } from 'src/app/core/components/snackbar/snackbar.component';
+import { TransportStatus } from 'src/app/core/enums/cargo-types.enum';
 import { TrailerTypes, TruckTypes } from 'src/app/core/enums/truck-types.enum';
+import { LoginService } from 'src/app/core/pages/login/login.service';
+import { StorageService } from 'src/app/storage/storage.service';
 
 @Component({
   selector: 'app-add-transport',
@@ -28,11 +34,17 @@ export class AddTransportComponent implements OnInit, OnDestroy {
   trailerTypes = Object.values(TrailerTypes);
 
   customPatterns = {
-    'R': { pattern: new RegExp('[А-Я]') },
-    'N': { pattern: new RegExp('[0-9]') },
+    R: { pattern: new RegExp('[А-Я]') },
+    N: { pattern: new RegExp('[0-9]') },
   };
 
-  constructor(private fb: UntypedFormBuilder) {}
+  constructor(
+    private fb: UntypedFormBuilder,
+    private storageService: StorageService,
+    private loginService: LoginService,
+    private snackBar: MatSnackBar,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -53,6 +65,7 @@ export class AddTransportComponent implements OnInit, OnDestroy {
       trailerType: this.fb.control(null, Validators.required),
       trailerLift: this.fb.control(null, Validators.required),
       trailerSize: this.fb.control(null, Validators.required),
+      driverProcent: this.fb.control(null, Validators.required),
     });
   }
 
@@ -68,6 +81,28 @@ export class AddTransportComponent implements OnInit, OnDestroy {
         } else {
           this.form.removeControl('trailerNumber');
         }
+      });
+  }
+
+  next() {
+    let transport = {
+      ...this.form.value,
+      truckStatus: TransportStatus.FREE,
+      cargoId: null,
+    };
+    this.loginService.user
+      .pipe(
+        takeUntil(this.destroyed$),
+        switchMap((user) =>
+          this.storageService.addNewTransport(user!.id, transport),
+        ),
+      )
+      .subscribe(() => {
+        this.snackBar.openFromComponent(SnackbarComponent, {
+          duration: 5000,
+          data: 'Транспорт успешно добавлен',
+        });
+        this.router.navigate(['/transport/list']);
       });
   }
 }

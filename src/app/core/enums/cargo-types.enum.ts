@@ -5,3 +5,10 @@ export enum CargoStatus {
     PAYMENT = 'Ожидание оплаты',
     DONE = 'Выполнен',
 }
+
+export enum TransportStatus {
+    FREE = 'Свободен',
+    IN_WORK = 'В рейсе',
+    REPAIR = 'В ремонте',
+    VACATION = 'В отпуске',
+}

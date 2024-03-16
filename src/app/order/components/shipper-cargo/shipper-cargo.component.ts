@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { CargoInterface } from 'src/app/core/interfaces/common.interfaces';
 
 @Component({
   selector: 'app-shipper-cargo',
@@ -7,6 +6,4 @@ import { CargoInterface } from 'src/app/core/interfaces/common.interfaces';
   styleUrls: ['./shipper-cargo.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ShipperCargoComponent {
-  @Input() cargo!: CargoInterface;
-}
+export class ShipperCargoComponent {}

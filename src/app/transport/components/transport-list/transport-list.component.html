@@ -1,1 +1,33 @@
-<p>transport-list works!</p>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <ng-container matColumnDef="Госномер">
+    <th mat-header-cell *matHeaderCellDef>Госномер</th>
+    <td mat-cell *matCellDef="let transport">{{ transport.truckNumber }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="Водитель">
+    <th mat-header-cell *matHeaderCellDef>Водитель</th>
+    <td mat-cell *matCellDef="let transport">{{ transport.driverName }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="Кузов">
+    <th mat-header-cell *matHeaderCellDef>Кузов</th>
+    <td mat-cell *matCellDef="let transport">{{ transport.trailerType }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="Грузоподъёмность / объём">
+    <th mat-header-cell *matHeaderCellDef>Грузоподъёмность / объём</th>
+    <td mat-cell *matCellDef="let transport">
+      {{ transport.trailerLift }} т. / {{ transport.trailerSize }} м3
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Статус">
+    <th mat-header-cell *matHeaderCellDef>Статус</th>
+    <td mat-cell *matCellDef="let transport">
+      <div class="status" [ngClass]="setStatusColor(transport.truckStatus)">{{ transport.truckStatus }}</div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
+</table>

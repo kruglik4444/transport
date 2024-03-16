@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { CargoInterface } from 'src/app/core/interfaces/common.interfaces';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-carrier-cargo',
@@ -7,13 +6,4 @@ import { CargoInterface } from 'src/app/core/interfaces/common.interfaces';
   styleUrls: ['./carrier-cargo.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CarrierCargoComponent implements OnInit{
-
-  @Input() cargo!: CargoInterface;
-
-  constructor() {}
-
-  ngOnInit(): void {
-    console.log(this.cargo);
-  }
-}
+export class CarrierCargoComponent {}

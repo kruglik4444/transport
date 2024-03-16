@@ -10,7 +10,10 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { Subject, switchMap, takeUntil } from 'rxjs';
+import { SnackbarComponent } from 'src/app/core/components/snackbar/snackbar.component';
 import { CargoStatus } from 'src/app/core/enums/cargo-types.enum';
 import { TrailerTypes } from 'src/app/core/enums/truck-types.enum';
 import { LoginService } from 'src/app/core/pages/login/login.service';
@@ -37,6 +40,8 @@ export class AddCargoComponent implements OnInit, OnDestroy {
     private fb: UntypedFormBuilder,
     private storageService: StorageService,
     private loginService: LoginService,
+    private router: Router,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
@@ -91,7 +96,11 @@ export class AddCargoComponent implements OnInit, OnDestroy {
         }),
       )
       .subscribe((response) => {
-        console.log(response);
+        this.snackBar.openFromComponent(SnackbarComponent, {
+          duration: 5000,
+          data: 'Груз успешно добавлен',
+        });
+        this.router.navigate(['/order']);
       });
   }
 }

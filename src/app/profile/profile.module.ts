@@ -19,7 +19,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { TruckListComponent } from './components/truck-list/truck-list.component';
 import { AddCargoComponent } from './components/add-cargo/add-cargo.component';
-import { CargoListComponent } from './components/cargo-list/cargo-list.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
@@ -32,7 +31,6 @@ import { FindCargoComponent } from './components/find-cargo/find-cargo.component
     AddTruckComponent,
     TruckListComponent,
     AddCargoComponent,
-    CargoListComponent,
     FindCargoComponent,
   ],
   imports: [

@@ -1,0 +1,19 @@
+.status {
+    @apply tw-text-center tw-border-solid tw-border;
+
+    &__free {
+        @apply tw-text-green-600 tw-border-green-600  tw-bg-green-50;
+    }
+    
+    &__repair {
+        @apply tw-text-red-600 tw-border-red-600 tw-bg-red-50;
+    }
+    
+    &__work {
+        @apply tw-text-blue-600 tw-border-blue-600 tw-bg-blue-50;
+    }
+
+    &__vacation {
+        @apply tw-text-yellow-600 tw-border-yellow-600 tw-bg-yellow-50;
+    }
+}

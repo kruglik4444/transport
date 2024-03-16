@@ -32,6 +32,20 @@ export interface TruckInterface {
   truckDescription: string;
 }
 
+export interface TransportInterface {
+  driverName: string;
+  truckName: string;
+  truckNumber: string;
+  truckType: string;
+  trailerType: string;
+  trailerLift: number;
+  trailerSize: number;
+  trailerNumber?: string;
+  driverProcent: number;
+  truckStatus: string;
+  cargoId: string;
+}
+
 
 export interface CargoInterface {
   name: string;
@@ -48,6 +62,7 @@ export interface CargoInterface {
   uploadingAddress: string;
   unloading: Unloading[];
   shipperId: string;
+  carrierId?: string;
   status: CargoStatus;  
 }
 

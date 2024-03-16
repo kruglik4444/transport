@@ -114,16 +114,30 @@
           </mat-form-field>
 
           <mat-form-field class="tw-basis-1/4">
-            <mat-label>Объем, м3</mat-label>
+            <mat-label>Объем кузова, м3</mat-label>
             <input
               formControlName="trailerSize"
               type="text"
               appOnlyNumbers
               matInput
-              placeholder="Введи объем"
+              placeholder="Введи объем кузова"
             />
             <mat-error *ngIf="form.controls['trailerSize'].hasError('required')">
-              Введи объем
+              Введи объем кузова
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="tw-basis-1/4">
+            <mat-label>Процент водетелю, %</mat-label>
+            <input
+              formControlName="driverProcent"
+              type="text"
+              appOnlyNumbers
+              matInput
+              placeholder="Введи процент"
+            />
+            <mat-error *ngIf="form.controls['driverProcent'].hasError('required')">
+              Процент водителю
             </mat-error>
           </mat-form-field>
           
@@ -131,4 +145,14 @@
       </mat-card-content>
     </form>
   </mat-card>
+</div>
+<div class="tw-flex tw-justify-end tw-mt-5">
+  <button
+      (click)="next()"
+      [disabled]="!this.form.valid"
+      mat-raised-button
+      color="primary"
+    >
+      Продолжить
+    </button>
 </div>

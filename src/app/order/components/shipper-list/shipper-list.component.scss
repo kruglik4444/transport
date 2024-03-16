@@ -1,0 +1,23 @@
+.status {
+    @apply tw-text-center tw-border-solid tw-border tw-px-2;
+
+    &__created {
+        @apply tw-text-green-600 tw-border-green-600  tw-bg-green-50;
+    }
+    
+    &__work {
+        @apply tw-text-blue-600 tw-border-blue-600 tw-bg-blue-50;
+    }
+
+    &__approval {
+        @apply tw-text-yellow-600 tw-border-yellow-600 tw-bg-yellow-50;
+    }
+
+    &__payment {
+        @apply tw-text-red-600 tw-border-red-600 tw-bg-red-50;
+    }
+
+    &__done {
+        @apply tw-text-gray-600 tw-border-gray-600 tw-bg-gray-50;
+    }
+}

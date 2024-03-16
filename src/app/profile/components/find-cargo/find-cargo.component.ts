@@ -5,10 +5,12 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subject, takeUntil } from 'rxjs';
+import { SnackbarComponent } from 'src/app/core/components/snackbar/snackbar.component';
 import { CargoStatus } from 'src/app/core/enums/cargo-types.enum';
 import { CargoInterface } from 'src/app/core/interfaces/common.interfaces';
+import { LoginService } from 'src/app/core/pages/login/login.service';
 import { StorageService } from 'src/app/storage/storage.service';
 
 @Component({
@@ -21,6 +23,8 @@ export class FindCargoComponent implements OnInit, OnDestroy {
   dataSource!: CargoInterface[];
 
   destroyed$ = new Subject<void>();
+
+  userId!: string;
 
   columnsToDisplay: string[] = [
     'Откуда',
@@ -36,11 +40,17 @@ export class FindCargoComponent implements OnInit, OnDestroy {
   constructor(
     private storageService: StorageService,
     private cdr: ChangeDetectorRef,
-    private router: Router,
+    private snackBar: MatSnackBar,
+    private loginService: LoginService,
   ) {}
 
   ngOnInit(): void {
     this.uploadData();
+    this.loginService.user
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((user) => {
+        this.userId = user!.id;
+      });
   }
 
   ngOnDestroy(): void {
@@ -57,11 +67,18 @@ export class FindCargoComponent implements OnInit, OnDestroy {
         this.cdr.markForCheck();
       });
   }
-  
+
   selectCargo(id: string) {
-    let status = { status: CargoStatus.ON_APPROVAL };
-    this.storageService.changeCargoStatus(id, status).pipe(takeUntil(this.destroyed$)).subscribe(() => {
-      this.router.navigate(['/order', id]);
-    })
+    let offer = { status: CargoStatus.ON_APPROVAL, carrierId: this.userId };
+    this.storageService
+      .changeCargoStatus(id, offer)
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(() => {
+        this.uploadData();
+        this.snackBar.openFromComponent(SnackbarComponent, {
+          duration: 5000,
+          data: 'Рейс добавлен на согласование заказчику',
+        });
+      });
   }
 }

@@ -11,11 +11,11 @@ const routes: Routes = [
   },
   {
     path: 'shipper/:id',
-    component: CarrierCargoComponent,
+    component: ShipperCargoComponent,
   },
   {
     path: 'carrier/:id',
-    component: ShipperCargoComponent,
+    component: CarrierCargoComponent,
   }
 ];
 

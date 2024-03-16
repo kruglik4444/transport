@@ -6,8 +6,8 @@ import { CarrierCargoComponent } from './components/carrier-cargo/carrier-cargo.
 import { ShipperCargoComponent } from './components/shipper-cargo/shipper-cargo.component';
 import { CarrierListComponent } from './components/carrier-list/carrier-list.component';
 import { ShipperListComponent } from './components/shipper-list/shipper-list.component';
-
-
+import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -20,6 +20,8 @@ import { ShipperListComponent } from './components/shipper-list/shipper-list.com
   imports: [
     CommonModule,
     OrderRoutingModule,
+    MatTableModule,
+    MatButtonModule,
   ]
 })
 export class OrderModule { }
