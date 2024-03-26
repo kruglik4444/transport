@@ -8,6 +8,7 @@ import { CarrierListComponent } from './components/carrier-list/carrier-list.com
 import { ShipperListComponent } from './components/shipper-list/shipper-list.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { MatButtonModule } from '@angular/material/button';
     OrderRoutingModule,
     MatTableModule,
     MatButtonModule,
+    MatCardModule,
   ]
 })
 export class OrderModule { }
